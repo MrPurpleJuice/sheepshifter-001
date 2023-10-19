@@ -3,6 +3,7 @@ import "./App.css";
 
 import TestFabric from "./Components/TestFabric/TestFabric";
 import TestFabric2 from "./Components/TestFabric2/TestFabric2";
+import TestFabric3 from "./Components/TestFabric3/TestFabric3";
 
 function ImageDisplay({ data }) {
   const baseUrl = "http://127.0.0.1:8000/";
@@ -69,7 +70,8 @@ function App() {
   return (
     <>
       {/* <TestFabric /> */}
-      <TestFabric2 data={data} />
+      <TestFabric3 data={data} />
+      {/* <TestFabric2 data={data} /> */}
       {error && <div>Error: {error.message}</div>}
       {data && <ImageDisplay data={data} />}
     </>
