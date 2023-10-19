@@ -6,8 +6,10 @@
   
   .sample-canvas {
     height: 800px;
+    width: 1000px;
   }
   
   .canvas-container {
-    border: 2px solid blue;
+    border: 10px solid blue;
+    width: 1000px;
   }

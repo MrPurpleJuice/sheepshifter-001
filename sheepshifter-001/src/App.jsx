@@ -73,7 +73,7 @@ function App() {
       {/* <TestFabric3 data={data} /> */}
       <TestFabric2 data={data} />
       {error && <div>Error: {error.message}</div>}
-      {data && <ImageDisplay data={data} />}
+      {/* {data && <ImageDisplay data={data} />} */}
     </>
   );
 }

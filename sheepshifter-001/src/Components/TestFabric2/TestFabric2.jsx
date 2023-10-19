@@ -11,13 +11,6 @@ export default function TestFabric({ data }) {
     // Any additional logic to handle data changes can go here
   }, [data]);
 
-  const onAddCircle = () => {
-    editor.addCircle();
-  };
-
-  const onAddRectangle = () => {
-    editor.addRectangle();
-  };
   console.log({ localData });
 
   const canvas = new fabric.Canvas("c");
@@ -49,9 +42,14 @@ export default function TestFabric({ data }) {
     for (let i = 0; i < localData.image_urls.length; i++) {
       let imageUrl = localData.image_urls[i];
       let placement = localData.placement_data[i];
+      console.log(`placement`, placement);
       console.log(`imageUrl`, imageUrl);
       fabric.Image.fromURL(imageUrl, function (oImg) {
         editor?.canvas.add(oImg);
+        oImg.set({
+          left: placement.left,
+          top: placement.top,
+        });
       });
       // fabric.Image.fromURL(imageUrl, function (img) {
       //   // Set the image dimensions and placement
@@ -71,8 +69,6 @@ export default function TestFabric({ data }) {
 
   return (
     <div className="App">
-      <button onClick={onAddCircle}>Add circle</button>
-      <button onClick={onAddRectangle}>Add Rectangle</button>
       <FabricJSCanvas className="sample-canvas" onReady={onReady} />
     </div>
   );
