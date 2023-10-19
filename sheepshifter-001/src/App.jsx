@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 import TestFabric from "./Components/TestFabric/TestFabric";
+import TestFabric2 from "./Components/TestFabric2/TestFabric2";
 
 function ImageDisplay({ data }) {
   const baseUrl = "http://127.0.0.1:8000/";
@@ -68,6 +69,7 @@ function App() {
   return (
     <>
       <TestFabric />
+      <TestFabric2 data={data} />
       {error && <div>Error: {error.message}</div>}
       {data && <ImageDisplay data={data} />}
     </>
