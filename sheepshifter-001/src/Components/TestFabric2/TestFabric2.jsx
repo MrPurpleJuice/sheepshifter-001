@@ -25,40 +25,46 @@ export default function TestFabric({ data }) {
   if (localData) {
     // Set canvas size to the original image size
     console.log(localData.image_width);
-    console.log(`data.image_width`, data.image_width);
-    canvas.setWidth(data.image_width);
-    canvas.setHeight(data.image_height);
+    console.log(`localData.image_width`, localData.image_width);
+    canvas.setWidth(localData.image_width);
+    canvas.setHeight(localData.image_height);
     canvas.renderAll(); // Re-render the canvas to apply new dimensions
 
     const backUrl = "src/assets/test-3-bg.png";
 
-    fabric.Image.fromURL(backUrl, function (img) {
-      // fabric.Image.fromURL(data.background, function (img) {
-      // Add background image
-      canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
-        scaleX: canvas.width / img.width,
-        scaleY: canvas.height / img.height,
-      });
-    });
-    console.log(`data.image_urls`, data.image_urls);
+    // fabric.Image.fromURL(backUrl, function (img) {
+    //   // Add background image
+    //   canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+    //     scaleX: canvas.width / img.width,
+    //     scaleY: canvas.height / img.height,
+    //   });
+    // });
+    // fabric.Image.fromURL(backUrl, function (oImg) {
+    //   editor?.canvas.add(oImg);
+    // });
+
+    console.log(`localData.image_urls`, localData.image_urls);
     canvas.renderAll(); // Re-render the canvas to apply new dimensions
     // Here we add each image to the canvas
-    for (let i = 0; i < data.image_urls.length; i++) {
-      let imageUrl = data.image_urls[i];
-      let placement = data.placement_data[i];
-
-      fabric.Image.fromURL(imageUrl, function (img) {
-        // Set the image dimensions and placement
-        img.set({
-          left: placement.left,
-          top: placement.top,
-        });
-
-        img.set({ id: "fabric-object-" + i });
-
-        // Add image to the canvas
-        canvas.add(img);
+    for (let i = 0; i < localData.image_urls.length; i++) {
+      let imageUrl = localData.image_urls[i];
+      let placement = localData.placement_data[i];
+      console.log(`imageUrl`, imageUrl);
+      fabric.Image.fromURL(imageUrl, function (oImg) {
+        editor?.canvas.add(oImg);
       });
+      // fabric.Image.fromURL(imageUrl, function (img) {
+      //   // Set the image dimensions and placement
+      //   img.set({
+      //     left: placement.left,
+      //     top: placement.top,
+      //   });
+
+      //   img.set({ id: "fabric-object-" + i });
+
+      //   // Add image to the canvas
+      //   canvas.add(img);
+      // });
     }
     canvas.renderAll(); // Re-render the canvas to apply new dimensions
   }
