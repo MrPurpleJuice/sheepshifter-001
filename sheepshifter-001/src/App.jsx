@@ -44,7 +44,7 @@ function App() {
       referrerPolicy: "strict-origin-when-cross-origin",
       body: JSON.stringify({
         search: {
-          image: "static/test-2.jpg"
+          image: "flowers"
         }
       }),
       method: "POST",
