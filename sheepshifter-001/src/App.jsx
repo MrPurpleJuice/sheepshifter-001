@@ -28,7 +28,7 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/", {
+    fetch("http://127.0.0.1:8000/segment", {
       headers: {
         "accept": "*/*",
         "accept-language": "en-US,en;q=0.9",
