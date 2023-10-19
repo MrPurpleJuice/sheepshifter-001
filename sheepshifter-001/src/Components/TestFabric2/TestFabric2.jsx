@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
 import "./styles.css";
 
+let dataSet = false;
+
 export default function TestFabric({ data }) {
   const [localData, setLocalData] = useState(data);
   const { editor, onReady } = useFabricJSEditor();
 
+  let canvas = null;
   useEffect(() => {
     setLocalData(data);
     // Any additional logic to handle data changes can go here
@@ -13,9 +16,10 @@ export default function TestFabric({ data }) {
 
   console.log({ localData });
 
-  const canvas = new fabric.Canvas("c");
-
-  if (localData) {
+  if (localData && !dataSet) {
+    console.log("rendering========================================>>>");
+    canvas = new fabric.Canvas("c");
+    dataSet = true;
     // Set canvas size to the original image size
     console.log(localData.image_width);
     console.log(`localData.image_width`, localData.image_width);
@@ -37,7 +41,7 @@ export default function TestFabric({ data }) {
     // });
 
     console.log(`localData.image_urls`, localData.image_urls);
-    canvas.renderAll(); // Re-render the canvas to apply new dimensions
+    // canvas.renderAll(); // Re-render the canvas to apply new dimensions
     // Here we add each image to the canvas
     for (let i = 0; i < localData.image_urls.length; i++) {
       let imageUrl = localData.image_urls[i];
@@ -64,7 +68,7 @@ export default function TestFabric({ data }) {
       //   canvas.add(img);
       // });
     }
-    canvas.renderAll(); // Re-render the canvas to apply new dimensions
+    // canvas.renderAll(); // Re-render the canvas to apply new dimensions
   }
 
   return (
