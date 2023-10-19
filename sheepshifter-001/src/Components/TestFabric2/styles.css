@@ -8,3 +8,6 @@
     height: 800px;
   }
   
+  .canvas-container {
+    border: 2px solid blue;
+  }

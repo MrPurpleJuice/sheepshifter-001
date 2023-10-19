@@ -68,7 +68,7 @@ function App() {
 
   return (
     <>
-      <TestFabric />
+      {/* <TestFabric /> */}
       <TestFabric2 data={data} />
       {error && <div>Error: {error.message}</div>}
       {data && <ImageDisplay data={data} />}
