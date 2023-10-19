@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
 import "./styles.css";
 
-import back from "../../assets/test-3-bg.png";
+// import back from "../../assets/test-3-bg.png";
 
 export default function TestFabric({ data }) {
   const [localData, setLocalData] = useState(data);
@@ -37,7 +37,10 @@ export default function TestFabric({ data }) {
     canvas.setHeight(data.image_height);
     canvas.renderAll(); // Re-render the canvas to apply new dimensions
 
-    fabric.Image.fromURL(data.background, function (img) {
+    const backUrl = "http://localhost:5173/src/assets/test-3-bg.png";
+
+    fabric.Image.fromURL(backUrl, function (img) {
+      // fabric.Image.fromURL(data.background, function (img) {
       // Add background image
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
         scaleX: canvas.width / img.width,
