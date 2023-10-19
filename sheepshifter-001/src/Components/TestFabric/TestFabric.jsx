@@ -14,14 +14,9 @@ export default function TestFabric() {
   return (
     <div className="App">
       <h1>FabricJS React Sample</h1>
+      <button onClick={onAddCircle}>Add circle</button>
+      <button onClick={onAddRectangle}>Add Rectangle</button>
+      <FabricJSCanvas className="sample-canvas" onReady={onReady} />
     </div>
   );
-  //   return (
-  //     <div className="App">
-  //       <h1>FabricJS React Sample</h1>
-  //       <button onClick={onAddCircle}>Add circle</button>
-  //       <button onClick={onAddRectangle}>Add Rectangle</button>
-  //       <FabricJSCanvas className="sample-canvas" onReady={onReady} />
-  //     </div>
-  //   );
 }
