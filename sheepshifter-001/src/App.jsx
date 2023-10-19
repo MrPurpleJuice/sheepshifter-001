@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+
+import TestFabric from "./Components/TestFabric/TestFabric";
 
 function ImageDisplay({ data }) {
   const baseUrl = "http://127.0.0.1:8000/";
@@ -23,7 +23,6 @@ function ImageDisplay({ data }) {
 }
 
 function App() {
-  const [count, setCount] = useState(0);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -68,6 +67,7 @@ function App() {
 
   return (
     <>
+      <TestFabric />
       {error && <div>Error: {error.message}</div>}
       {data && <ImageDisplay data={data} />}
     </>
