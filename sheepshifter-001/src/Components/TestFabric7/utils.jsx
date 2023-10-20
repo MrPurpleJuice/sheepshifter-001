@@ -88,4 +88,34 @@ const createRotationArrows = ({ editor }) => {
   }
 };
 
-export default { createRotationArrows };
+const addBackgroundImg = ({ editor, backgroundImgUrl }) => {
+  fabric.Image.fromURL(backgroundImgUrl, function (img) {
+    editor?.canvas.setBackgroundImage(
+      img,
+      editor?.canvas.renderAll.bind(editor?.canvas),
+      {
+        scaleX: editor?.canvas.width / img.width,
+        scaleY: editor?.canvas.height / img.height,
+      }
+    );
+  });
+};
+
+const addSegmentedImages = ({ editor, localData }) => {
+  // Here we add each image to the canvas
+  for (let i = 0; i < localData.image_urls.length; i++) {
+    let imageUrl = localData.image_urls[i];
+    let placement = localData.placement_data[i];
+
+    fabric.Image.fromURL(imageUrl, function (oImg) {
+      oImg.set({
+        left: placement.left,
+        top: placement.top,
+      });
+      oImg.set({ id: "fabric-object-" + i });
+      editor?.canvas.add(oImg);
+    });
+  }
+};
+
+export default { createRotationArrows, addBackgroundImg, addSegmentedImages };
