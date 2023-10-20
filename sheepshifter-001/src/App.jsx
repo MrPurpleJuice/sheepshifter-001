@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
-import "./App.css";
+import React, { useState, useEffect } from "react";
 import TestFabric7 from "./Components/TestFabric7/TestFabric7";
 import PythonService from "./Services/PythonService.jsx";
+import Layout from "./Components/Layout/Layout";
+
+import "./App.css";
 
 const body = JSON.stringify({
   search: { image: "flowers" },
@@ -26,7 +28,8 @@ function App() {
 
   return (
     <>
-      <TestFabric7 data={data} />
+      <Layout data={data} />
+      {/* <TestFabric7 data={data} /> */}
       {error && <div>Error: {error.message}</div>}
     </>
   );
