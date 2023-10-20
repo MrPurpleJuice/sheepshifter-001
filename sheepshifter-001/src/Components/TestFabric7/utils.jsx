@@ -96,7 +96,7 @@ const addSegmentedImages = ({ editor, localData }) => {
         left: placement.left,
         top: placement.top,
       });
-      oImg.set({ id: "fabric-object-" + i });
+      oImg.set({ id: localData.class_labels[i]});
       editor?.canvas.add(oImg);
     });
   }
