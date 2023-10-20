@@ -36,7 +36,9 @@ function Layout({ data }) {
     <div className={css.main}>
       <div className={css.topRow}>{renderedImages}</div>
       <div className={css.bottomRow}>
-        <div className={css.tallBox}></div>
+        <div className={css.tallBox}>
+          <div className={css.messageText}>Segment Picker</div>
+        </div>
         <div className={css.largeBox}>
           <TestFabric7 data={data} />
         </div>

@@ -44,7 +44,7 @@
 }
 
 .largeBox {
-  flex: 6;
+  flex: 3;
   border: 1px solid black;
   margin: 1%;
   background-color: var(--box-bg-color);
