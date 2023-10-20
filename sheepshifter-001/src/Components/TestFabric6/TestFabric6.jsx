@@ -40,7 +40,7 @@ const App = () => {
         <button onClick={onAddImage}>Add Image</button>
         <button onClick={onAddImage2}>Add Image2</button>
         <FabricJSCanvas className="sample-canvas" onReady={onReady} />
-        <canvas id="canvas" width="300" height="300"></canvas>
+        {/* <canvas id="canvas" width="300" height="300"></canvas> */}
       </div>
     </div>
   );
