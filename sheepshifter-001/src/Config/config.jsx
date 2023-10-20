@@ -3,4 +3,15 @@ const urls = {
   reactUrl: "http://localhost:5173",
 };
 
-export default { urls };
+const paths = { rawImagesPath: "../../../static2/rawImages/inUse/" };
+
+const rawImages = [
+  "tay001.jpg",
+  "tay003.jpg",
+  "tay003.jpg",
+  "tay003.jpg",
+  "chickenPicnicRaw001.png",
+  "moonManRaw001.png",
+];
+
+export default { urls, rawImages, paths };
