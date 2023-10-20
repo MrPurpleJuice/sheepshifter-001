@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import TestFabric7 from "../TestFabric7/TestFabric7";
 import css from "./Layout.module.css";
 
+const rawImagesPath = "../../../static2/rawImages/inUse/";
 const rawImages = [
-  "./tay001.jpg",
-  "./tay003.jpg",
-  "./tay003.jpg",
-  "./tay003.jpg",
-  "./tay003.jpg",
+  "tay001.jpg",
+  "tay003.jpg",
+  "tay003.jpg",
+  "tay003.jpg",
+  "chickenPicnicRaw001.png",
+  "moonManRaw001.png",
 ];
 
 function Layout({ data }) {
@@ -18,7 +20,9 @@ function Layout({ data }) {
       const loadedImages = {};
 
       for (const imagePath of rawImages) {
-        const module = await import(imagePath);
+        const filePath = `${rawImagesPath}${imagePath}`;
+
+        const module = await import(filePath);
         loadedImages[imagePath] = module.default;
       }
 
