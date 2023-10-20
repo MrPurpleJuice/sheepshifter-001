@@ -1,8 +1,8 @@
 .main {
   display: flex;
   flex-direction: column;
-  height: 80vh;
-  width: 80vw;
+  height: 90vh;
+  width: 1200px;
   border: 5px solid red;
 }
 
@@ -22,6 +22,15 @@
   border: 1px solid black;
   margin: 1%;
   background-color: grey;
+  overflow: hidden;
+}
+
+.box img {
+  max-width: 110%;
+  /* max-height: 100%; */
+  display: block;
+  /* To center the image, if it's smaller than the container */
+  /* margin: auto; */
 }
 
 .tallBox {
