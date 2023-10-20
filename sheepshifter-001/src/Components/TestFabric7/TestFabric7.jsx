@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
-import "./styles.css";
+import css from "./styles.module.css";
+// import "./styles.css";
 
 let firstRenderHappened = false;
 
@@ -145,7 +146,7 @@ export default function TestFabric({ data }) {
   }
 
   return (
-    <div className="App">
+    <div className={css.main}>
       <FabricJSCanvas className="sample-canvas" onReady={onReady} />
     </div>
   );

@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-import TestFabric from "./Components/TestFabric/TestFabric";
-import TestFabric2 from "./Components/TestFabric2/TestFabric2";
-import TestFabric3 from "./Components/TestFabric3/TestFabric3";
-import TestFabric4 from "./Components/TestFabric4/TestFabric4";
-import TestFabric5 from "./Components/TestFabric5/TestFabric5";
 import TestFabric6 from "./Components/TestFabric6/TestFabric6";
 import TestFabric7 from "./Components/TestFabric7/TestFabric7";
 
@@ -73,13 +68,8 @@ function App() {
 
   return (
     <>
-      {/* <TestFabric /> */}
-      <TestFabric7 data={data} />
-      {/* <TestFabric2 data={data} /> */}
-      {/* <TestFabric3 data={data} /> */}
-      {/* <TestFabric4 data={data} /> */}
       {/* <TestFabric6 data={data} /> */}
-      {/* <TestFabric3 data={data} /> */}
+      <TestFabric7 data={data} />
       {error && <div>Error: {error.message}</div>}
       {/* {data && <ImageDisplay data={data} />} */}
     </>

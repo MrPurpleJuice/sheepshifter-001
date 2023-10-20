@@ -1,0 +1,16 @@
+.main {
+  border: 2px solid red;
+  display: flex;
+  height: 800px;
+  width: 1000px;
+
+  :global {
+    .sample-canvas {
+      border: 10px solid purple;
+    }
+
+    .canvas-container {
+      border: 2px solid greenyellow;
+    }
+  }
+}
