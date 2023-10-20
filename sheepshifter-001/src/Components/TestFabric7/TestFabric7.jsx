@@ -11,7 +11,7 @@ let firstRenderHappened = false;
 const backgroundImgUrl = "static/test-3-bg.png";
 
 const aspectRatio = 16 / 9;
-const canvasScalingFactor = 1.8;
+const canvasScalingFactor = 1.5;
 
 export default function TestFabric({ data }) {
   const [localData, setLocalData] = useState(data);
