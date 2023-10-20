@@ -1,77 +1,59 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-import TestFabric6 from "./Components/TestFabric6/TestFabric6";
 import TestFabric7 from "./Components/TestFabric7/TestFabric7";
 
-function ImageDisplay({ data }) {
-  const baseUrl = "http://127.0.0.1:8000/";
-  return (
-    <div>
-      {data.image_urls.map((relativeUrl, index) => (
-        <div key={relativeUrl} style={{ margin: "10px" }}>
-          <img
-            src={baseUrl + relativeUrl}
-            alt={data.class_labels[index]}
-            width={data.placement_data[index].left + "px"}
-            height={data.placement_data[index].top + "px"}
-          />
-          <p>{data.class_labels[index]}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
+const fetchSegments = async ({ setData, setError }) => {
+  fetch("http://127.0.0.1:8000/segment", {
+    headers: {
+      accept: "*/*",
+      "accept-language": "en-US,en;q=0.9",
+      "content-type": "application/json",
+      "sec-ch-ua":
+        '"Chromium";v="118", "Google Chrome";v="118", "Not=A?Brand";v="99"',
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": '"macOS"',
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+    },
+    referrer: "http://localhost:5173",
+    referrerPolicy: "strict-origin-when-cross-origin",
+    body: JSON.stringify({
+      search: { image: "flowers" },
+    }),
+    method: "POST",
+    mode: "cors",
+    credentials: "include",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      setData(data);
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+      setError(error);
+    });
+};
 
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/segment", {
-      headers: {
-        accept: "*/*",
-        "accept-language": "en-US,en;q=0.9",
-        "content-type": "application/json",
-        "sec-ch-ua":
-          '"Chromium";v="118", "Google Chrome";v="118", "Not=A?Brand";v="99"',
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"macOS"',
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-      },
-      referrer: "http://localhost:5173",
-      referrerPolicy: "strict-origin-when-cross-origin",
-      body: JSON.stringify({
-        search: { image: "flowers" },
-      }),
-      method: "POST",
-      mode: "cors",
-      credentials: "include",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setData(data);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-        setError(error);
-      });
+    fetchSegments({ setData, setError });
   }, []);
 
   return (
     <>
-      {/* <TestFabric6 data={data} /> */}
       <TestFabric7 data={data} />
       {error && <div>Error: {error.message}</div>}
-      {/* {data && <ImageDisplay data={data} />} */}
     </>
   );
 }
