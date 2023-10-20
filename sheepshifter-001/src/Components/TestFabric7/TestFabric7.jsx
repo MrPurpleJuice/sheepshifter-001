@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
 import "./styles.css";
 
-let dataSet = false;
+let firstRenderHappened = false;
 
 export default function TestFabric({ data }) {
   const [localData, setLocalData] = useState(data);
@@ -14,10 +14,10 @@ export default function TestFabric({ data }) {
     // Any additional logic to handle data changes can go here
   }, [data]);
 
-  if (localData && !dataSet) {
+  if (localData && !firstRenderHappened) {
     console.log("rendering========================================>>>");
     canvas = new fabric.Canvas("c");
-    dataSet = true;
+    firstRenderHappened = true;
 
     fabric.Object.prototype.transparentCorners = false;
     fabric.Object.prototype.cornerColor = "blue";
@@ -46,7 +46,7 @@ export default function TestFabric({ data }) {
 
     // Function to switch view
     function switchView(direction) {
-      console.log(canvas.getActiveObject());
+      console.log(editor?.canvas.getActiveObject());
 
       // Logic to switch views based on the clicked arrow
       switch (direction.corner) {
@@ -67,17 +67,17 @@ export default function TestFabric({ data }) {
           break;
       }
 
-      var left = canvas.getActiveObject().left;
-      var top = canvas.getActiveObject().top;
-      var angle = canvas.getActiveObject().angle;
+      var left = editor?.canvas.getActiveObject().left;
+      var top = editor?.canvas.getActiveObject().top;
+      var angle = editor?.canvas.getActiveObject().angle;
 
       // Updating the view
       fabric.Image.fromURL(views[currentView], function (img) {
         img.set({ left: left, top: top, angle: angle });
-        canvas.remove(canvas.getActiveObject());
-        canvas.add(img);
-        canvas.setActiveObject(img);
-        canvas.renderAll();
+        editor?.canvas.remove(editor?.canvas.getActiveObject());
+        editor?.canvas.add(img);
+        editor?.canvas.setActiveObject(img);
+        editor?.canvas.renderAll();
       });
     }
 
