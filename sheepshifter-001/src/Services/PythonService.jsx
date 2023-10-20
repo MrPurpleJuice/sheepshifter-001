@@ -4,11 +4,8 @@ const urls = config.urls;
 const { pythonServerUrl, reactUrl } = urls;
 
 const url = `${pythonServerUrl}segment`;
-const body = JSON.stringify({
-  search: { image: "flowers" },
-});
 
-async function getSegments() {
+async function getSegments({ body }) {
   try {
     const response = await fetch(url, {
       headers: {
