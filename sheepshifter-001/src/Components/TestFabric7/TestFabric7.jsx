@@ -28,8 +28,8 @@ export default function TestFabric({ data }) {
     // Set canvas size to the original image size
     console.log(localData.image_width);
     console.log(`localData.image_width`, localData.image_width);
-    canvas.setWidth(localData.image_width);
-    canvas.setHeight(localData.image_height);
+    editor?.canvas.setWidth(localData.image_width);
+    editor?.canvas.setHeight(localData.image_height);
     canvas.renderAll(); // Re-render the canvas to apply new dimensions
 
     const backUrl = "src/assets/test-3-bg.png";
