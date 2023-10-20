@@ -14,8 +14,6 @@ export default function TestFabric({ data }) {
     // Any additional logic to handle data changes can go here
   }, [data]);
 
-  console.log({ localData });
-
   if (localData && !dataSet) {
     console.log("rendering========================================>>>");
     canvas = new fabric.Canvas("c");
@@ -26,23 +24,18 @@ export default function TestFabric({ data }) {
     fabric.Object.prototype.cornerStyle = "circle";
 
     // Set canvas size to the original image size
-    console.log(localData.image_width);
-    console.log(`localData.image_width`, localData.image_width);
     editor?.canvas.setWidth(localData.image_width);
     editor?.canvas.setHeight(localData.image_height);
-    canvas.renderAll(); // Re-render the canvas to apply new dimensions
+    // canvas.renderAll(); // Re-render the canvas to apply new dimensions
 
     const backUrl = "src/assets/test-3-bg.png";
 
     fabric.Image.fromURL(backUrl, function (img) {
       // Add background image
       editor?.canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
-        // scaleX: canvas.width / img.width,
-        // scaleY: canvas.height / img.height,
+        scaleX: editor?.canvas.width / img.width,
+        scaleY: editor?.canvas.height / img.height,
       });
-    });
-    fabric.Image.fromURL(backUrl, function (img) {
-      editor?.canvas.add(img);
     });
 
     // Here we add each image to the canvas
