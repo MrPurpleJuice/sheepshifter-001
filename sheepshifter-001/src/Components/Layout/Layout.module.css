@@ -6,7 +6,12 @@
   border: 5px solid red;
 }
 
-.topRow,
+.topRow {
+  display: flex;
+  flex: 1;
+  max-height: 20vh;
+}
+
 .bottomRow {
   display: flex;
   flex: 1;

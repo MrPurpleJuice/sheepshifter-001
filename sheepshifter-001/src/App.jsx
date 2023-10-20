@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TestFabric7 from "./Components/TestFabric7/TestFabric7";
 import PythonService from "./Services/PythonService.jsx";
 import Layout from "./Components/Layout/Layout";
 
@@ -29,7 +28,6 @@ function App() {
   return (
     <>
       <Layout data={data} />
-      {/* <TestFabric7 data={data} /> */}
       {error && <div>Error: {error.message}</div>}
     </>
   );
