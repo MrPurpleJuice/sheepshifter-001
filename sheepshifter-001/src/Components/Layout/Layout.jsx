@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import TestFabric7 from "../TestFabric7/TestFabric7";
-import css from "./Layout.module.css";
-
 import config from "../../Config/config";
+
+import css from "./Layout.module.css";
 
 const { rawImages, paths } = config;
 
