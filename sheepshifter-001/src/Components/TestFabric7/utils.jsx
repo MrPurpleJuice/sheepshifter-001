@@ -1,7 +1,3 @@
-const testFunc = () => {
-  console.log(`555`, 555);
-};
-
 const createRotationArrows = ({ editor }) => {
   // Load SVG icons
   const arrows = {
@@ -92,4 +88,4 @@ const createRotationArrows = ({ editor }) => {
   }
 };
 
-export default { testFunc, createRotationArrows };
+export default { createRotationArrows };
