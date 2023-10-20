@@ -25,67 +25,6 @@ const App = () => {
   fabric.Object.prototype.cornerColor = "blue";
   fabric.Object.prototype.cornerStyle = "circle";
 
-  const onAddCircle = () => {
-    //console.log(editor);
-    editor?.addCircle();
-  };
-  let color = 55;
-  const onAddLine = () => {
-    //console.log(editor);
-    editor?.addLine();
-  };
-  const onAddRectangle = () => {
-    //editor?.addRectangle();
-    const cColor = "#ffff" + color;
-    color += 100;
-    //console.log(canvas);
-    let rects = [
-      { top: 300, left: 100, width: 175, height: 100, color: "red" },
-      { top: 200, left: 100, width: 175, height: 100, color: "yellow" },
-      { top: 100, left: 275, width: 125, height: 300, color: "gray" },
-    ];
-    for (var i = 0; i < rects.length; i++) {
-      var rect = new fabric.Rect({
-        top: rects[i]["top"],
-        left: rects[i]["left"],
-
-        width: rects[i]["width"],
-        height: rects[i]["height"],
-        border: 10,
-        borderColor: "black",
-        fill: rects[i]["color"],
-      });
-      console.log(rect);
-
-      //rect.on('drop', handleDrop, false);
-      //rect.addEventListener('drop', handleDrop, false);
-      console.log("rect" + i, rect);
-      editor?.canvas.add(rect);
-    }
-  };
-
-  const renderIcon = (ctx, left, top, styleOverride, fabricObject) => {
-    var size = 24;
-    ctx.save();
-    ctx.translate(left, top);
-    ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-    ctx.drawImage(img, -size / 2, -size / 2, size, size);
-    ctx.restore();
-  };
-  const onDelete = () => {
-    editor?.deleteSelected();
-    console.log(selectedObjects);
-  };
-  fabric.Object.prototype.controls.deleteControl = new fabric.Control({
-    x: 0.5,
-    y: -0.5,
-    offsetY: 16,
-    cursorStyle: "pointer",
-    mouseUpHandler: onDelete,
-    render: renderIcon,
-    cornerSize: 24,
-  });
-
   const onAddImage = () => {
     console.log("tpoly:", tpoly);
     var tspoly = new fabric.Polygon(tpoly, {
@@ -95,7 +34,7 @@ const App = () => {
       fill: "white",
       objectCaching: false,
     });
-    tspoly.on({ drop: handleDrop });
+    // tspoly.on({ drop: handleDrop });
 
     editor?.canvas.add(tspoly);
   };
@@ -138,7 +77,6 @@ const App = () => {
       <div>
         <button onClick={onAddImage}>Add Image</button>
         <button onClick={onAddImage2}>Add Image2</button>
-        <button onClick={onDelete}>Delete</button>
         <FabricJSCanvas className="sample-canvas" onReady={onReady} />
         <canvas id="canvas" width="300" height="300"></canvas>
       </div>
