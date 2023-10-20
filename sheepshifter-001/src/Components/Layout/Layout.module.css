@@ -27,6 +27,8 @@
 
 .box img {
   max-width: 110%;
+  /* max-height: auto; */
+  /* max-height: 150%; */
   display: block;
   /* To center the image, if it's smaller than the container */
   /* margin: auto; */
