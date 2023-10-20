@@ -10,45 +10,29 @@ const createRotationArrows = ({ editor }) => {
   // Initial view
   let currentView = "front";
 
-  // Mapping of views
-  let views = {
-    top: "static/flowers/flowers-view--90-0-0-top.png",
-    left: "static/flowers/flowers-view-0--90-0-left.png",
-    right: "static/flowers/flowers-view-0-90-0-right.png",
-    behind: "static/flowers/flowers-view-0-180-0-behind.png",
-    bottom: "static/flowers/flowers-view-90-0-0-bottom.png",
-    front: "static/rendered/masked_cropped_61661.png",
-  };
+  // Temporary -- bad code -- sorry!
+  const person_angle_views = ["0.png", "1.png", "2.png", "3.png", "4.png", "5.png", "6.png"]
+  let currentObjAngle = 0;
 
   // Function to switch view
   function switchView(direction) {
     console.log(editor?.canvas.getActiveObject());
 
-    // Logic to switch views based on the clicked arrow
-    switch (direction.corner) {
-      case "upArrow":
-        currentView = "top";
-        break;
-      case "downArrow":
-        currentView = "bottom";
-        break;
-      case "leftArrow":
-        currentView = "left";
-        break;
-      case "rightArrow":
-        currentView = "right";
-        break;
-      case "front":
-        currentView = "front";
-        break;
+    if(direction.corner == "leftArrow") {
+      currentObjAngle++;
+    } else {
+      currentObjAngle--;
     }
+
+    let num_angles = person_angle_views.length;
+    let next_view = "/static/rotation/bladerunner/person/" + person_angle_views[currentObjAngle%num_angles];
 
     var left = editor?.canvas.getActiveObject().left;
     var top = editor?.canvas.getActiveObject().top;
     var angle = editor?.canvas.getActiveObject().angle;
 
     // Updating the view
-    fabric.Image.fromURL(views[currentView], function (img) {
+    fabric.Image.fromURL(next_view, function (img) {
       img.set({ left: left, top: top, angle: angle });
       editor?.canvas.remove(editor?.canvas.getActiveObject());
       editor?.canvas.add(img);
