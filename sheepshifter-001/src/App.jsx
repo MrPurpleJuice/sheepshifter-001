@@ -5,6 +5,8 @@ import TestFabric from "./Components/TestFabric/TestFabric";
 import TestFabric2 from "./Components/TestFabric2/TestFabric2";
 import TestFabric3 from "./Components/TestFabric3/TestFabric3";
 import TestFabric4 from "./Components/TestFabric4/TestFabric4";
+import TestFabric5 from "./Components/TestFabric5/TestFabric5";
+import TestFabric6 from "./Components/TestFabric6/TestFabric6";
 
 function ImageDisplay({ data }) {
   const baseUrl = "http://127.0.0.1:8000/";
@@ -72,7 +74,9 @@ function App() {
     <>
       {/* <TestFabric /> */}
       {/* <TestFabric3 data={data} /> */}
+      <TestFabric6 data={data} />
       <TestFabric2 data={data} />
+      {/* <TestFabric2 data={data} /> */}
       {/* <TestFabric4 data={data} /> */}
       {error && <div>Error: {error.message}</div>}
       {/* {data && <ImageDisplay data={data} />} */}
