@@ -34,8 +34,11 @@ function Layout({ data }) {
 
   return (
     <div className={css.main}>
-      <div className={""}>Click a Raw Image to Load it into the Segmenter!</div>
+      <div className={css.messageText}>
+        Click a Raw Image to Load it into the Segmenter!
+      </div>
       <div className={css.topRow}>{renderedImages}</div>
+      <div className={css.messageText}>Image Segmenter</div>
       <div className={css.bottomRow}>
         <div className={css.tallBox}></div>
         <div className={css.largeBox}>

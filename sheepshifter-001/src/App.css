@@ -4,5 +4,7 @@
   padding: 2rem;
   text-align: center;
 
+  /* constants */
+
   --box-bg-color: rgb(206, 177, 177);
 }
