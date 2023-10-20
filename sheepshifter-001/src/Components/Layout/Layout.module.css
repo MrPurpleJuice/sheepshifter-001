@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 90vh;
   width: 1200px;
-  border: 5px solid red;
+  /* border: 5px solid red; */
 }
 
 .topRow {

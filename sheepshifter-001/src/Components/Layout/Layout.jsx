@@ -3,7 +3,6 @@ import TestFabric7 from "../TestFabric7/TestFabric7";
 import css from "./Layout.module.css";
 
 import tay001 from "./tay001.jpg";
-import tay002 from "./tay002.jpg";
 import tay003 from "./tay003.jpg";
 
 function Layout({ data }) {
@@ -14,10 +13,10 @@ function Layout({ data }) {
           <img src={tay001} alt="tay001" />
         </div>
         <div className={css.box}>
-          <img src={tay002} alt="tay002" />
+          <img src={tay003} alt="tay003" />
         </div>
         <div className={css.box}>
-          <img src={tay003} alt="tay003" />
+          <img src={tay001} alt="tay001" />
         </div>
         <div className={css.box}>
           <img src={tay003} alt="tay003" />
