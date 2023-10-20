@@ -30,6 +30,9 @@ export default function TestFabric({ data }) {
     editor?.canvas.setWidth(localData.image_width);
     editor?.canvas.setHeight(localData.image_height);
 
+    // Re-render the canvas to apply new dimensions (doesn't work)
+    editor?.canvas.renderAll();
+
     createRotationArrows({ editor });
     addBackgroundImg({ editor, backgroundImgUrl });
     addSegmentedImages({ editor, localData });
