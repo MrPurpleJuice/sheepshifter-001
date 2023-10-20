@@ -6,7 +6,6 @@ import PythonService from "./Services/PythonService.jsx";
 const fetchSegments = async ({ setData, setError }) => {
   try {
     const data = await PythonService.getSegments();
-    console.log(`data`, data);
     setData(data);
   } catch (error) {
     setError(error);

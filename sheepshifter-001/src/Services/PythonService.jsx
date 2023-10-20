@@ -1,6 +1,13 @@
+import config from "../Config/config";
+
+const urls = config.urls;
+const { pythonServerUrl, reactUrl } = urls;
+
+const url = `${pythonServerUrl}segment`;
+
 async function getSegments() {
   try {
-    const response = await fetch("http://127.0.0.1:8000/segment", {
+    const response = await fetch(url, {
       headers: {
         accept: "*/*",
         "accept-language": "en-US,en;q=0.9",
@@ -13,7 +20,7 @@ async function getSegments() {
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-origin",
       },
-      referrer: "http://localhost:5173",
+      referrer: reactUrl,
       referrerPolicy: "strict-origin-when-cross-origin",
       body: JSON.stringify({
         search: { image: "flowers" },
@@ -22,7 +29,6 @@ async function getSegments() {
       mode: "cors",
       credentials: "include",
     });
-    console.log(`response`, response);
     if (response.ok) {
       return await response.json();
     } else {
