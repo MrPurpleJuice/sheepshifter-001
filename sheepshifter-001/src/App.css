@@ -3,4 +3,6 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
+  --box-bg-color: rgb(206, 177, 177);
 }

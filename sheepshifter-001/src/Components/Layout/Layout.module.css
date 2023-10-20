@@ -1,7 +1,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: 70vh;
   width: 1200px;
   /* border: 5px solid red; */
 }
@@ -37,12 +37,12 @@
   flex: 1;
   border: 1px solid black;
   margin: 1%;
-  background-color: grey;
+  background-color: var(--box-bg-color);
 }
 
 .largeBox {
   flex: 3;
   border: 1px solid black;
   margin: 1%;
-  background-color: grey;
+  background-color: var(--box-bg-color);
 }
