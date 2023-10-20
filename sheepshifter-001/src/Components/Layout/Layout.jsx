@@ -34,16 +34,16 @@ function Layout({ data }) {
 
   return (
     <div className={css.main}>
-      <div className={css.messageText}>
+      {/* <div className={css.messageText}>
         Click a Raw Image to Load it into the Segmenter
-      </div>
+      </div> */}
       <div className={css.topRow}>{renderedImages}</div>
-      <div className={css.messageText}>
+      {/* <div className={css.messageText}>
         Image Segmenter (rearrange your segmented image)
-      </div>
+      </div> */}
       <div className={css.bottomRow}>
         <div className={css.tallBox}>
-          <div className={css.messageText}>Segment Picker</div>
+          {/* <div className={css.messageText}>Segment Picker</div> */}
         </div>
         <div className={css.largeBox}>
           <TestFabric7 data={data} />

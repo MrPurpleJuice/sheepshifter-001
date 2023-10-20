@@ -10,6 +10,9 @@ let firstRenderHappened = false;
 
 const backgroundImgUrl = "static/test-3-bg.png";
 
+const aspectRatio = 16 / 9;
+const canvasScalingFactor = 1.8;
+
 export default function TestFabric({ data }) {
   const [localData, setLocalData] = useState(data);
   const { editor, onReady } = useFabricJSEditor();
@@ -27,8 +30,8 @@ export default function TestFabric({ data }) {
     fabric.Object.prototype.cornerStyle = "circle";
 
     // Set canvas size to the original image size
-    editor?.canvas.setWidth(localData.image_width);
-    editor?.canvas.setHeight(localData.image_height);
+    editor?.canvas.setWidth(localData.image_width * canvasScalingFactor);
+    editor?.canvas.setHeight(localData.image_height * canvasScalingFactor);
 
     // Re-render the canvas to apply new dimensions (doesn't work)
     editor?.canvas.renderAll();
