@@ -9,7 +9,6 @@ const rawImages = [
   "tay001.jpg",
   "tay003.jpg",
   "tay003.jpg",
-  "tay003.jpg",
   "chickenPicnicRaw001.png",
   "moonManRaw001.png",
 ];
