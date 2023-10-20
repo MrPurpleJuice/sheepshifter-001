@@ -1,0 +1,255 @@
+{% extends "layout.html" %}
+
+{% block title %} <title>Artbot</title> {% endblock %}
+
+{% block content %}
+
+<section class="py-5 container">
+    <div class="row py-lg-5">
+      <div class="col-lg-12 col-md-12 mx-auto">
+        <div class="text-center">
+          <h1>Artbot</h1>
+        </div>
+
+        <div>
+            <img id="editImg" src="/static/test-4.jpeg">
+        </div>
+
+        <div>
+            <button id="segment" class="btn btn-primary">Segment</button>
+            <button id="rerender" class="btn btn-primary">Re-render</button>
+        </div>
+
+        <div id="labels-container">
+        </div>
+
+        <div>
+            <canvas id="c" width="500" height="500"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const canvas = new fabric.Canvas('c');
+
+    // Load SVG icons
+    const arrows = {
+        down: '/static/icons/down-arrow.svg',
+        up: '/static/icons/up-arrow.svg',
+        left: '/static/icons/left-arrow.svg',
+        right: '/static/icons/right-arrow.svg'
+    };
+
+    // Initial view
+    let currentView = 'front';
+
+    // Mapping of views
+    let views = {
+        top: 'static/flowers/flowers-view--90-0-0-top.png',
+        left: 'static/flowers/flowers-view-0--90-0-left.png',
+        right: 'static/flowers/flowers-view-0-90-0-right.png',
+        behind: 'static/flowers/flowers-view-0-180-0-behind.png',
+        bottom: 'static/flowers/flowers-view-90-0-0-bottom.png',
+        front: "static/rendered/masked_cropped_61661.png"
+    };
+
+    // Function to switch view
+    function switchView(direction) {
+        console.log(canvas.getActiveObject())
+
+        // Logic to switch views based on the clicked arrow
+        switch (direction.corner) {
+            case 'upArrow':
+                currentView = 'top';
+                break;
+            case 'downArrow':
+                currentView = 'bottom';
+                break;
+            case 'leftArrow':
+                currentView = 'left';
+                break;
+            case 'rightArrow':
+                currentView = 'right';
+                break;
+            case 'front':
+                currentView = 'front';
+                break;
+        }
+
+        var left = canvas.getActiveObject().left;
+        var top = canvas.getActiveObject().top;
+        var angle = canvas.getActiveObject().angle;
+    
+        // Updating the view
+        fabric.Image.fromURL(views[currentView], function(img) {
+            img.set({ left: left, top: top, angle: angle });
+            canvas.remove(canvas.getActiveObject());
+            canvas.add(img);
+            canvas.setActiveObject(img);
+            canvas.renderAll();
+        });
+    }
+
+    // Add arrows as controls
+    for (let direction in arrows) {
+        var img = document.createElement('img');
+        img.src = arrows[direction];
+
+        fabric.Object.prototype.controls[direction + 'Arrow'] = new fabric.Control({
+            x: direction === 'right' ? 0.5 : direction === 'left' ? -0.5 : 0,
+            y: direction === 'down' ? 0.5 : direction === 'up' ? -0.5 : 0,
+            offsetY: 16,
+            offsetX: 16,
+            cursorStyle: 'pointer',
+            mouseUpHandler: function(eventData, transform, direction) {
+                switchView(direction);
+            }.bind(this, direction),
+            render: renderIcon(img),
+            cornerSize: 24
+        });
+    }
+
+    function renderIcon(img) {
+        return function(ctx, left, top, styleOverride, fabricObject) {
+            var size = this.cornerSize;
+            ctx.save();
+            ctx.translate(left, top);
+            ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+            ctx.drawImage(img, -size/2, -size/2, size, size);
+            ctx.restore();
+        };
+    }
+
+    // DOM functionality
+    let button = document.querySelector('#segment');
+
+    button.addEventListener('click', function () {
+        let search = { image: "bladerunner" };
+        console.log("Replicate API Called");
+
+        fetch('/segment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                search: search
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);  // Process the response here
+            
+            // Set canvas size to the original image size
+            canvas.setWidth(data.image_width);
+            canvas.setHeight(data.image_height);
+            canvas.renderAll();  // Re-render the canvas to apply new dimensions
+
+            fabric.Image.fromURL(data.background, function(img) {
+                // Add background image
+                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+                    scaleX: canvas.width / img.width,
+                    scaleY: canvas.height / img.height
+                });
+            });
+
+            // Here we add each image to the canvas
+            for (let i = 0; i < data.image_urls.length; i++) {
+                let imageUrl = data.image_urls[i];
+                let placement = data.placement_data[i]; 
+
+                fabric.Image.fromURL(imageUrl, function (img) {
+                    // Set the image dimensions and placement
+                    img.set({
+                        left: placement.left, 
+                        top: placement.top     
+                    });
+
+                    img.set({id: 'fabric-object-' + i});
+
+                    // Add image to the canvas
+                    canvas.add(img);
+                });
+            }
+
+            // Display class labels in a list on the left and associate with fabric objects
+            const labelsContainer = document.getElementById('labels-container');
+            data.class_labels.forEach((label, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = label;
+                
+                // Associate the label with the fabric object's index
+                listItem.dataset.fabricObjectIndex = index;
+
+                // Add click event listener to select the associated fabric object on the canvas
+                listItem.addEventListener('click', () => {
+                    const objectIndex = listItem.dataset.fabricObjectIndex;
+                    const object = canvas.item(objectIndex);
+                    if (object) {
+                        canvas.setActiveObject(object);
+                        canvas.renderAll();  // Add this line to re-render the canvas to show the selection
+                    }
+                });
+
+                labelsContainer.appendChild(listItem);
+            });
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
+
+
+    // Slightly Re-render canvas at the end
+
+    let render_button = document.querySelector('#rerender');
+
+    render_button.addEventListener('click', function () {
+        var dataURL = canvas.toDataURL({
+            format: 'png',
+            quality: 1
+        });
+
+        fetch('/reload', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ img: dataURL })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+
+            // Clearing the current canvas content
+            canvas.clear().renderAll();  // Added renderAll() to ensure the canvas is cleared immediately
+
+            fabric.Image.fromURL(data, function(img) {
+                img.set({
+                    scaleX: canvas.width / img.width,
+                    scaleY: canvas.height / img.height,
+                });
+                canvas.add(img).renderAll();  // Added renderAll() to ensure the image is rendered immediately
+            }, {
+                crossOrigin: 'anonymous'  // Added crossOrigin attribute to handle CORS
+            });
+     
+        })
+        .catch((error) => console.error('Error:', error));
+    });
+
+});
+
+
+</script>
+
+{% endblock %}

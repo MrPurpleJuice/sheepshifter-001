@@ -1,0 +1,48 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  width: 1200px;
+  /* border: 5px solid red; */
+}
+
+.topRow {
+  display: flex;
+  flex: 1;
+  max-height: 20vh;
+}
+
+.bottomRow {
+  display: flex;
+  flex: 1;
+}
+
+.box {
+  flex: 1;
+  border: 1px solid black;
+  margin: 1%;
+  background-color: grey;
+  overflow: hidden;
+}
+
+.box img {
+  max-width: 110%;
+  /* max-height: 100%; */
+  display: block;
+  /* To center the image, if it's smaller than the container */
+  /* margin: auto; */
+}
+
+.tallBox {
+  flex: 1;
+  border: 1px solid black;
+  margin: 1%;
+  background-color: var(--box-bg-color);
+}
+
+.largeBox {
+  flex: 3;
+  border: 1px solid black;
+  margin: 1%;
+  background-color: var(--box-bg-color);
+}

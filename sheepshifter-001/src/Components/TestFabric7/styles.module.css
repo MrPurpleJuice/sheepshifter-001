@@ -1,0 +1,19 @@
+.main {
+  /* border: 1px solid #ff0000; */
+  display: inline-flex;
+
+  :global(.sample-canvas) {
+    /* border: 10px solid purple; */
+    display: inline-flex;
+
+    :global(.canvas-container) {
+      /* border: 10px solid greenyellow; */
+      display: inline-flex;
+      display: inline-block;
+    }
+
+    :global(.lower-canvas) {
+      /* border: 5px solid orange; */
+    }
+  }
+}
