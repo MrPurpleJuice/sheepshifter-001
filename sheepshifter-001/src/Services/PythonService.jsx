@@ -4,6 +4,9 @@ const urls = config.urls;
 const { pythonServerUrl, reactUrl } = urls;
 
 const url = `${pythonServerUrl}segment`;
+const body = JSON.stringify({
+  search: { image: "flowers" },
+});
 
 async function getSegments() {
   try {
@@ -22,9 +25,7 @@ async function getSegments() {
       },
       referrer: reactUrl,
       referrerPolicy: "strict-origin-when-cross-origin",
-      body: JSON.stringify({
-        search: { image: "flowers" },
-      }),
+      body,
       method: "POST",
       mode: "cors",
       credentials: "include",
