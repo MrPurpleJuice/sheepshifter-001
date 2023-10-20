@@ -1,8 +1,8 @@
 const createRotationArrows = ({ editor }) => {
   // Load SVG icons
   const arrows = {
-    down: "/static/icons/down-arrow.svg",
-    up: "/static/icons/up-arrow.svg",
+    //down: "/static/icons/down-arrow.svg",
+    //up: "/static/icons/up-arrow.svg",
     left: "/static/icons/left-arrow.svg",
     right: "/static/icons/right-arrow.svg",
   };

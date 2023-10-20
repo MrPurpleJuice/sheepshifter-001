@@ -8,7 +8,7 @@ const { addBackgroundImg, createRotationArrows, addSegmentedImages } = utils;
 
 let firstRenderHappened = false;
 
-const backgroundImgUrl = "static/test-3-bg.png";
+const backgroundImgUrl = "static/test-4-bg.png";
 
 const aspectRatio = 16 / 9;
 const canvasScalingFactor = 1.5;

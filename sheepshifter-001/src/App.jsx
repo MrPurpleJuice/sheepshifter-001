@@ -5,7 +5,7 @@ import Layout from "./Components/Layout/Layout";
 import "./App.css";
 
 const body = JSON.stringify({
-  search: { image: "flowers" },
+  search: { image: "bladerunner" },
 });
 
 const fetchSegments = async ({ setData, setError }) => {
