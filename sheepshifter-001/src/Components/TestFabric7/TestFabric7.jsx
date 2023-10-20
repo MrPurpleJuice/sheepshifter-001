@@ -117,7 +117,8 @@ export default function TestFabric({ data }) {
     editor?.canvas.setHeight(localData.image_height);
     // canvas.renderAll(); // Re-render the canvas to apply new dimensions
 
-    const backUrl = "src/assets/test-3-bg.png";
+    const backUrl = "static/test-3-bg.png";
+    // const backUrl = "src/assets/test-3-bg.png";
 
     fabric.Image.fromURL(backUrl, function (img) {
       // Add background image
