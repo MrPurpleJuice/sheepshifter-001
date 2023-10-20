@@ -45,8 +45,6 @@ export default function TestFabric({ data }) {
       editor?.canvas.add(img);
     });
 
-    console.log(`localData.image_urls`, localData.image_urls);
-    // canvas.renderAll(); // Re-render the canvas to apply new dimensions
     // Here we add each image to the canvas
     for (let i = 0; i < localData.image_urls.length; i++) {
       let imageUrl = localData.image_urls[i];
@@ -60,27 +58,7 @@ export default function TestFabric({ data }) {
         oImg.set({ id: "fabric-object-" + i });
         editor?.canvas.add(oImg);
       });
-
-      // fabric.Image.fromURL(imageUrl, function (img) {
-      //   editor?.canvas.add(img);
-      //   img.set({
-      //     left: placement.left,
-      //     top: placement.top,
-      //   });
-      //   img.set({ id: "fabric-object-" + i });
-      // });
-      // fabric.Image.fromURL(imageUrl, function (img) {
-      //   // Set the image dimensions and placement
-      //   img.set({
-      //     left: placement.left,
-      //     top: placement.top,
-      //   });
-
-      //   // Add image to the canvas
-      //   canvas.add(img);
-      // });
     }
-    // canvas.renderAll(); // Re-render the canvas to apply new dimensions
   }
 
   return (
