@@ -6,8 +6,6 @@ import utils from "./utils.jsx";
 
 const { addBackgroundImg, createRotationArrows, addSegmentedImages } = utils;
 
-let firstRenderHappened = false;
-
 const backgroundImgUrl = "static/test-4-bg.png";
 
 const aspectRatio = 16 / 9;
