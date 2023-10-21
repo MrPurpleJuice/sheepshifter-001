@@ -94,6 +94,7 @@ export default function SegmentedImage({ data }) {
     <div className={css.main}>
       <Button
         variant="outline-primary"
+        className={css.button}
         onClick={() => reRender({ canvas, imageName })}
       >
         Render
