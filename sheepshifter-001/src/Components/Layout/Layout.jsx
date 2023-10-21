@@ -63,7 +63,7 @@ function Layout({ data, onThumbnailClick, imageName }) {
       <div className={css.topRow}>{renderedImages}</div>
       <div className={css.bottomRow}>
         <div className={css.tallBox}>
-          <div className={css.messageText}>Layers</div>
+          <div className={css.messageText}>Elements</div>
 
           <ul>
             {layers.map((layer, index) => (

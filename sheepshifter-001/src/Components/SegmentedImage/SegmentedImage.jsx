@@ -27,7 +27,7 @@ let prevLocalImageName = "";
 
 let canvas = null;
 let imageName = null;
-export default function SegmentedImage({ data }) {
+export default function SegmentedImage({ data, selectObject }) {
   const [localData, setLocalData] = useState(data);
   const { editor, onReady } = useFabricJSEditor();
 
@@ -89,6 +89,7 @@ export default function SegmentedImage({ data }) {
       canvas.add(img).renderAll(); // Added renderAll() to ensure the image is rendered immediately
     });
   };
+
 
   return (
     <div className={css.main}>
