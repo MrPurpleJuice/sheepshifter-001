@@ -1,3 +1,8 @@
+let defaultImageName = "";
+defaultImageName = "bladeRunner";
+defaultImageName = "taylor";
+defaultImageName = "moon";
+
 const urls = {
   pythonServerUrl: "http://127.0.0.1:8000/",
   reactUrl: "http://localhost:5173",
@@ -6,11 +11,28 @@ const urls = {
 const paths = { rawImagesPath: "../../../static2/rawImages/inUse/" };
 
 const rawImages = [
-  "bladeRunnerRaw001.jpg",
-  "moonManRaw002.jpg",
-  "taylorRaw001.png",
-  "picnicRaw001.jpg",
-  "eTRaw001.jpg",
+  {
+    imageName: "bladeRunner",
+    apiName: "bladerunner",
+    fileName: "bladeRunnerRaw001.jpg",
+  },
+  { imageName: "moon", apiName: "moon", fileName: "moonManRaw002.jpg" },
+  { imageName: "taylor", apiName: "taylor", fileName: "taylorRaw001.png" },
+  { imageName: "picnic", apiName: "", fileName: "picnicRaw001.jpg" },
+  { imageName: "et", apiName: "", fileName: "etRaw001.jpg" },
 ];
 
-export default { urls, rawImages, paths };
+const getApiNameFromImageName = ({ imageName }) => {
+  return (
+    rawImages.find((image) => image.imageName === imageName)?.apiName ||
+    "apiName not found"
+  );
+};
+
+export default {
+  urls,
+  rawImages,
+  paths,
+  getApiNameFromImageName,
+  defaultImageName,
+};

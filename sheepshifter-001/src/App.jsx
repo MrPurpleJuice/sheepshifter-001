@@ -2,14 +2,25 @@ import React, { useState, useEffect } from "react";
 import PythonService from "./Services/PythonService.jsx";
 import Layout from "./Components/Layout/Layout";
 
+import config from "./Config/config.jsx";
+
 import "./App.css";
 
-const body = JSON.stringify({
-  search: { image: "bladerunner" },
-});
+const { defaultImageName, getApiNameFromImageName } = config;
 
-const fetchSegments = async ({ setData, setError }) => {
+const getBody = ({ apiName }) => {
+  return JSON.stringify({
+    search: { image: apiName },
+  });
+};
+
+const fetchSegments = async ({ setData, setError, imageName }) => {
   try {
+    const apiName = getApiNameFromImageName({ imageName });
+    console.log(`apiName`, apiName);
+
+    const body = getBody({ apiName });
+
     const data = await PythonService.getSegments({ body });
     setData(data);
   } catch (error) {
@@ -22,13 +33,19 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchSegments({ setData, setError });
+    fetchSegments({ setData, setError, imageName: defaultImageName });
   }, []);
 
+  const onThumbnailClick = ({ imageName }) => {
+    const apiName = getApiNameFromImageName({ imageName });
+    console.log(`imageName`, imageName);
+  };
+
+  const layoutProps = { data, onThumbnailClick };
   return (
     <>
-      <Layout data={data} />
       {error && <div>Error: {error.message}</div>}
+      <Layout {...layoutProps} />
     </>
   );
 }
