@@ -7,7 +7,9 @@ import utils from "./utils.jsx";
 const { addBackgroundImg, createRotationArrows, addSegmentedImages } = utils;
 
 const backgroundImgUrl = "static/testBackground002.jpg";
-const canvasScalingFactor = 0.63;
+// const canvasScalingFactor = 0.4;
+// const canvasScalingFactor = 0.46;
+const canvasScalingFactor = 0.58;
 
 // Use this to detect when the image has changed
 let prevLocalImageName = "";
@@ -39,15 +41,17 @@ export default function TestFabric({ data }) {
     fabric.Object.prototype.cornerStyle = "circle";
 
     // Set canvas size to the original image size
-    canvas.setWidth(1920 * canvasScalingFactor);
-    canvas.setHeight(1080 * canvasScalingFactor);
+    canvas.setWidth(1920 * canvasScalingFactor * 1.1);
+    // canvas.setWidth(1920 * canvasScalingFactor);
+    canvas.setHeight(1080 * canvasScalingFactor * 1.1);
+    // canvas.setHeight(1080 * canvasScalingFactor);
 
     console.log(`canvas.width `, canvas.width);
 
     // Re-render the canvas to apply new dimensions
     canvas.renderAll();
 
-    const backgroundImgUrl = localData.background;
+    // const backgroundImgUrl = localData.background;
 
     createRotationArrows({ canvas });
     addBackgroundImg({ canvas, backgroundImgUrl });

@@ -1,13 +1,16 @@
 .main {
   display: flex;
   flex-direction: column;
-  height: 95vh;
-  width: 95vw;
+  /* height: 100vh; */
+  width: 98vw;
   border: 1px solid black;
   margin: auto;
-  max-width: 1640px;
-  max-height: 920px;
+  max-width: 1600px;
+  max-height: 900px;
   background-color: var(--main-bg-color);
+  /* flex: 1; */
+  border: 2px solid purple;
+  /* overflow: hidden; */
 }
 
 .topRow {
@@ -19,6 +22,9 @@
 .bottomRow {
   display: flex;
   flex: 1;
+  border: 2px solid purple;
+  justify-content: space-between;
+  /* align-items: flex-start; */
 }
 
 .box {
@@ -27,13 +33,11 @@
   margin: 1%;
   background-color: var(--box-bg-color);
   overflow: hidden;
-  max-width: 300px;
+  /* max-width: 300px; */
 }
 
 .box img {
   max-width: 100%;
-  /* max-height: auto; */
-  /* max-height: 100%; */
   display: block;
 }
 
@@ -42,15 +46,17 @@
   border: 1px solid black;
   margin: 1%;
   background-color: var(--box-bg-color);
+  max-width: 20%;
 }
 
 .largeBox {
-  /* flex: 3; */
+  display: flex;
+  flex: 1;
   border: 1px solid black;
   margin: 1%;
-  background-color: var(--box-bg-color);
-  width: 1210px;
-  height: 688px;
+  /* padding: 1%; */
+  background-color: var(--main-bg-color);
+  justify-content: center;
 }
 
 .messageText {
