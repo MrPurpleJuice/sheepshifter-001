@@ -1,5 +1,6 @@
 .main {
   /* border: 1px solid #ff0000; */
+  position: relative;
 
   :global(.sample-canvas) {
     /* border: 10px solid purple; */
@@ -16,6 +17,7 @@
 
 .button {
   position: absolute;
-  top: 50px;
-  left: 50px;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
 }
