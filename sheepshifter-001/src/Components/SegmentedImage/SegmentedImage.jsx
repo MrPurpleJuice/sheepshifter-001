@@ -6,10 +6,13 @@ import utils from "./utils.jsx";
 
 const { addBackgroundImg, createRotationArrows, addSegmentedImages } = utils;
 
-const backgroundImgUrl = "static/test-4-bg.png";
+const backgroundImgUrl = "static/testBackground002.jpg";
+// const backgroundImgUrl = "static/test-4-bg.png";
 
 const aspectRatio = 16 / 9;
-const canvasScalingFactor = 1;
+const canvasScalingFactor = 0.63;
+
+// Use this to detect when the image has changed
 let prevLocalImageName = "";
 
 export default function TestFabric({ data }) {
@@ -28,6 +31,7 @@ export default function TestFabric({ data }) {
     localData?.localImageName &&
     localData.localImageName !== prevLocalImageName;
 
+  // Only allow the page to render when the image chagnes
   if (shouldRender) {
     console.log("rendering========================================>>>");
     prevLocalImageName = localData.localImageName;
@@ -38,10 +42,12 @@ export default function TestFabric({ data }) {
     fabric.Object.prototype.cornerStyle = "circle";
 
     // Set canvas size to the original image size
-    canvas.setWidth(localData.image_width * canvasScalingFactor);
-    canvas.setHeight(localData.image_height * canvasScalingFactor);
+    canvas.setWidth(1920 * canvasScalingFactor);
+    canvas.setHeight(1080 * canvasScalingFactor);
 
-    // Re-render the canvas to apply new dimensions (doesn't work)
+    console.log(`canvas.width `, canvas.width);
+
+    // Re-render the canvas to apply new dimensions
     canvas.renderAll();
 
     createRotationArrows({ canvas });

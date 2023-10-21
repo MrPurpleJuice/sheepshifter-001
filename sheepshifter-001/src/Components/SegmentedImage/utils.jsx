@@ -83,6 +83,8 @@ const createRotationArrows = ({ canvas }) => {
 };
 
 const addBackgroundImg = ({ canvas, backgroundImgUrl }) => {
+  console.log(`backgroundImgUrl`, backgroundImgUrl);
+
   fabric.Image.fromURL(backgroundImgUrl, function (img) {
     canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
       scaleX: canvas.width / img.width,
