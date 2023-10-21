@@ -111,4 +111,5 @@ const addSegmentedImages = ({ canvas, localData }) => {
   }
 };
 
+
 export default { createRotationArrows, addBackgroundImg, addSegmentedImages };
