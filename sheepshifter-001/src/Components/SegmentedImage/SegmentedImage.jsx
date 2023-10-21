@@ -20,7 +20,7 @@ const fetchRotation = async ({ body }) => {
 };
 
 const backgroundImgUrl = "static/testBackground002.jpg";
-const canvasScalingFactor = 0.58;
+const canvasScalingFactor = 0.95;
 
 // Use this to detect when the image has changed
 let prevLocalImageName = "";
@@ -55,8 +55,8 @@ export default function SegmentedImage({ data }) {
     fabric.Object.prototype.cornerStyle = "circle";
 
     // Set canvas size to the original image size
-    canvas.setWidth(1920 * canvasScalingFactor * 1.1);
-    canvas.setHeight(1080 * canvasScalingFactor * 1.1);
+    canvas.setWidth(1920 * canvasScalingFactor);
+    canvas.setHeight(1080 * canvasScalingFactor);
 
     // Re-render the canvas to apply new dimensions
     canvas.renderAll();
