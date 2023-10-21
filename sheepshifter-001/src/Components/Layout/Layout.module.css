@@ -3,13 +3,13 @@
   flex-direction: column;
   /* height: 100vh; */
   width: 98vw;
-  border: 1px solid black;
-  margin: auto;
+  /* border: 1px solid black; */
+  /* margin: auto; */
   max-width: 1600px;
   max-height: 900px;
   background-color: var(--main-bg-color);
   /* flex: 1; */
-  border: 2px solid purple;
+  /* border: 2px solid purple; */
   /* overflow: hidden; */
 }
 
@@ -22,7 +22,7 @@
 .bottomRow {
   display: flex;
   flex: 1;
-  border: 2px solid purple;
+  /* border: 2px solid purple; */
   justify-content: space-between;
   /* align-items: flex-start; */
 }
