@@ -16,6 +16,7 @@ function Layout({ data }) {
       for (const imagePath of rawImages) {
         const filePath = `${paths.rawImagesPath}${imagePath}`;
 
+        /* @vite-ignore */
         const module = await import(filePath);
         loadedImages[imagePath] = module.default;
       }
