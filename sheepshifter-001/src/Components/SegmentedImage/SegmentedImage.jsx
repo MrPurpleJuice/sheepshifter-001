@@ -6,6 +6,15 @@ import utils from "./utils.jsx";
 
 const { addBackgroundImg, createRotationArrows, addSegmentedImages } = utils;
 
+import PythonService from "../../Services/PythonService.jsx";
+
+const fetchRotation = async ({ body }) => {
+  try {
+    const data = await PythonService.getRotation({ body });
+    console.log(`data`, data);
+  } catch (error) {}
+};
+
 const backgroundImgUrl = "static/testBackground002.jpg";
 // const canvasScalingFactor = 0.4;
 // const canvasScalingFactor = 0.46;
@@ -14,12 +23,12 @@ const canvasScalingFactor = 0.58;
 // Use this to detect when the image has changed
 let prevLocalImageName = "";
 
-export default function TestFabric({ data }) {
+export default function SegmentedImage({ data }) {
   const [localData, setLocalData] = useState(data);
   const { editor, onReady } = useFabricJSEditor();
 
   useEffect(() => {
-    console.log(`data`, data);
+    // console.log(`data`, data);
     if (data?.localImageName) {
       setLocalData(data);
     }
@@ -32,6 +41,7 @@ export default function TestFabric({ data }) {
 
   // Only allow the page to render when the image chagnes
   if (shouldRender) {
+    // fetchRotation();
     console.log("rendering========================================>>>");
     prevLocalImageName = localData.localImageName;
     const { canvas } = editor;
@@ -42,18 +52,14 @@ export default function TestFabric({ data }) {
 
     // Set canvas size to the original image size
     canvas.setWidth(1920 * canvasScalingFactor * 1.1);
-    // canvas.setWidth(1920 * canvasScalingFactor);
     canvas.setHeight(1080 * canvasScalingFactor * 1.1);
-    // canvas.setHeight(1080 * canvasScalingFactor);
-
-    console.log(`canvas.width `, canvas.width);
 
     // Re-render the canvas to apply new dimensions
     canvas.renderAll();
 
     const backgroundImgUrl = localData.background;
 
-    createRotationArrows({ canvas });
+    createRotationArrows({ canvas, fetchRotation });
     addBackgroundImg({ canvas, backgroundImgUrl });
     addSegmentedImages({ canvas, localData });
   }

@@ -1,4 +1,65 @@
-const createRotationArrows = ({ canvas }) => {
+import config from "../../Config/config";
+
+const urls = config.urls;
+const { pythonServerUrl, reactUrl } = urls;
+const url = `${pythonServerUrl}rotation`;
+
+// Function to switch view
+function switchView({ direction, canvas, fetchRotation }) {
+  let next_view;
+  const id = canvas.getActiveObject().id;
+  console.log(`id`, id);
+
+  const body = JSON.stringify({
+    img: "bladerunner",
+    obj: canvas.getActiveObject().id,
+    pos: 0,
+    dir: direction["corner"],
+  });
+
+  console.log(`body`, body);
+  fetchRotation({ body });
+  return;
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      img: "bladerunner",
+      obj: canvas.getActiveObject().id,
+      pos: 0,
+      dir: direction["corner"],
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data); // Process the response here
+      next_view = data.nextView;
+      var left = canvas.getActiveObject().left;
+      var top = canvas.getActiveObject().top;
+      var angle = canvas.getActiveObject().angle;
+
+      // Updating the view
+      fabric.Image.fromURL(next_view, function (img) {
+        img.set({ left: left, top: top, angle: angle });
+        canvas.remove(canvas.getActiveObject());
+        canvas.add(img);
+        canvas.setActiveObject(img);
+        canvas.renderAll();
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+const createRotationArrows = ({ canvas, fetchRotation }) => {
   // Load SVG icons
   const arrows = {
     //down: "/static/icons/down-arrow.svg",
@@ -22,34 +83,34 @@ const createRotationArrows = ({ canvas }) => {
   ];
   let currentObjAngle = 0;
 
-  // Function to switch view
-  function switchView(direction) {
-    // console.log(canvas.getActiveObject());
+  // // Function to switch view
+  // function switchView(direction) {
+  //   // console.log(canvas.getActiveObject());
 
-    if (direction.corner == "leftArrow") {
-      currentObjAngle++;
-    } else {
-      currentObjAngle--;
-    }
+  //   if (direction.corner == "leftArrow") {
+  //     currentObjAngle++;
+  //   } else {
+  //     currentObjAngle--;
+  //   }
 
-    let num_angles = person_angle_views.length;
-    let next_view =
-      "/static/rotation/bladerunner/person/" +
-      person_angle_views[currentObjAngle % num_angles];
+  //   let num_angles = person_angle_views.length;
+  //   let next_view =
+  //     "/static/rotation/bladerunner/person/" +
+  //     person_angle_views[currentObjAngle % num_angles];
 
-    var left = canvas.getActiveObject().left;
-    var top = canvas.getActiveObject().top;
-    var angle = canvas.getActiveObject().angle;
+  //   var left = canvas.getActiveObject().left;
+  //   var top = canvas.getActiveObject().top;
+  //   var angle = canvas.getActiveObject().angle;
 
-    // Updating the view
-    fabric.Image.fromURL(next_view, function (img) {
-      img.set({ left: left, top: top, angle: angle });
-      canvas.remove(canvas.getActiveObject());
-      canvas.add(img);
-      canvas.setActiveObject(img);
-      canvas.renderAll();
-    });
-  }
+  //   // Updating the view
+  //   fabric.Image.fromURL(next_view, function (img) {
+  //     img.set({ left: left, top: top, angle: angle });
+  //     canvas.remove(canvas.getActiveObject());
+  //     canvas.add(img);
+  //     canvas.setActiveObject(img);
+  //     canvas.renderAll();
+  //   });
+  // }
 
   // Add arrows as controls
   for (let direction in arrows) {
@@ -63,7 +124,7 @@ const createRotationArrows = ({ canvas }) => {
       offsetX: 16,
       cursorStyle: "pointer",
       mouseUpHandler: function (eventData, transform, direction) {
-        switchView(direction);
+        switchView({ direction, canvas, fetchRotation });
       }.bind(this, direction),
       render: renderIcon(img),
       cornerSize: 24,
@@ -83,8 +144,6 @@ const createRotationArrows = ({ canvas }) => {
 };
 
 const addBackgroundImg = ({ canvas, backgroundImgUrl }) => {
-  console.log(`backgroundImgUrl`, backgroundImgUrl);
-
   fabric.Image.fromURL(backgroundImgUrl, function (img) {
     canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
       // To what are these scaling factors applied?
