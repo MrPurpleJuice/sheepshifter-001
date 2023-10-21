@@ -1,8 +1,11 @@
 body {
   /* constants */
-  --body-bg-color: rgb(0, 0, 0);
-  --main-bg-color: rgb(165, 167, 171);
-  --box-bg-color: rgb(226, 226, 226);
+  --body-bg-color: rgb(228 213 221);
+  /* --body-bg-color: rgb(0, 0, 0); */
+  --main-bg-color: var(--body-bg-color)
+  --box-bg-color: var(--body-bg-color)
+  /* --main-bg-color: rgb(165, 167, 171);
+  --box-bg-color: rgb(226, 226, 226); */
 
   background-color: var(--body-bg-color) !important;
 }
