@@ -4,12 +4,21 @@ import Layout from "./Components/Layout/Layout";
 
 import "./App.css";
 
-const body = JSON.stringify({
-  search: { image: "bladerunner" },
-});
+let defaultImageName = "";
+defaultImageName = "bladerunner";
+defaultImageName = "taylor";
+defaultImageName = "moon";
 
-const fetchSegments = async ({ setData, setError }) => {
+const getBody = ({ imageName }) => {
+  return JSON.stringify({
+    search: { image: imageName },
+  });
+};
+
+const fetchSegments = async ({ setData, setError, imageName }) => {
   try {
+    const body = getBody({ imageName });
+
     const data = await PythonService.getSegments({ body });
     setData(data);
   } catch (error) {
@@ -22,13 +31,16 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchSegments({ setData, setError });
+    fetchSegments({ setData, setError, imageName: defaultImageName });
   }, []);
 
+  const onThumbnailClick = ({ imageName }) => {};
+
+  const layoutProps = { data, onThumbnailClick };
   return (
     <>
-      <Layout data={data} />
       {error && <div>Error: {error.message}</div>}
+      <Layout {...layoutProps} />
     </>
   );
 }

@@ -15,6 +15,7 @@ function Layout({ data }) {
 
       for (const imagePath of rawImages) {
         const filePath = `${paths.rawImagesPath}${imagePath}`;
+        console.log(`filePath`, filePath);
 
         /* @vite-ignore */
         const module = await import(filePath);
