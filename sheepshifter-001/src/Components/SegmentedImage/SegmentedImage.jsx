@@ -25,17 +25,14 @@ export default function TestFabric({ data }) {
     }
   }, [data]);
 
-  console.log(`prevLocalImageName`, prevLocalImageName);
-  console.log(`data?.localImageName`, data?.localImageName);
-  console.log("---------->");
-
   const shouldRender =
     localData?.localImageName &&
     localData.localImageName !== prevLocalImageName;
+
   if (shouldRender) {
     prevLocalImageName = localData.localImageName;
     console.log("rendering========================================>>>");
-
+    editor?.canvas.clear();
     fabric.Object.prototype.transparentCorners = false;
     fabric.Object.prototype.cornerColor = "blue";
     fabric.Object.prototype.cornerStyle = "circle";
