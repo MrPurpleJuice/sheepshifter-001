@@ -12,19 +12,27 @@ const backgroundImgUrl = "static/test-4-bg.png";
 
 const aspectRatio = 16 / 9;
 const canvasScalingFactor = 1.1;
+let prevLocalImageName = "";
 
 export default function TestFabric({ data }) {
   const [localData, setLocalData] = useState(data);
   const { editor, onReady } = useFabricJSEditor();
 
   useEffect(() => {
-    setLocalData(data);
+    console.log(`data`, data);
+    if (data?.localImageName) {
+      setLocalData(data);
+    }
   }, [data]);
 
-  if (localData && !firstRenderHappened) {
-    console.log("rendering========================================>>>");
-    firstRenderHappened = true;
+  const shouldRender =
+    localData?.localImageName &&
+    localData.localImageName !== prevLocalImageName;
 
+  if (shouldRender) {
+    prevLocalImageName = localData.localImageName;
+    console.log("rendering========================================>>>");
+    editor?.canvas.clear();
     fabric.Object.prototype.transparentCorners = false;
     fabric.Object.prototype.cornerColor = "blue";
     fabric.Object.prototype.cornerStyle = "circle";
