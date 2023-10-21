@@ -2,22 +2,24 @@ import React, { useState, useEffect } from "react";
 import PythonService from "./Services/PythonService.jsx";
 import Layout from "./Components/Layout/Layout";
 
+import config from "./Config/config.jsx";
+
 import "./App.css";
 
-let defaultImageName = "";
-defaultImageName = "bladerunner";
-defaultImageName = "taylor";
-defaultImageName = "moon";
+const { defaultImageName, getApiNameFromImageName } = config;
 
-const getBody = ({ imageName }) => {
+const getBody = ({ apiName }) => {
   return JSON.stringify({
-    search: { image: imageName },
+    search: { image: apiName },
   });
 };
 
 const fetchSegments = async ({ setData, setError, imageName }) => {
   try {
-    const body = getBody({ imageName });
+    const apiName = getApiNameFromImageName({ imageName });
+    console.log(`apiName`, apiName);
+
+    const body = getBody({ apiName });
 
     const data = await PythonService.getSegments({ body });
     setData(data);
@@ -35,6 +37,7 @@ function App() {
   }, []);
 
   const onThumbnailClick = ({ imageName }) => {
+    const apiName = getApiNameFromImageName({ imageName });
     console.log(`imageName`, imageName);
   };
 
