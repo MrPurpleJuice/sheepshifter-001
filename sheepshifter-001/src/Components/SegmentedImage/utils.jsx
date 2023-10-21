@@ -18,7 +18,6 @@ const switchView = async ({ direction, canvas, fetchRotation, imageName }) => {
   var angle = canvas.getActiveObject().angle;
   var obj = canvas.getActiveObject().id;
   var pos = data.pos;
-  console.log(data)
 
   // Updating the view
   fabric.Image.fromURL(next_view, function (img) {
