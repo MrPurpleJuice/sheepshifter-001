@@ -21,7 +21,7 @@ const fetchSegments = async ({ setData, setError, imageName }) => {
     const body = getBody({ apiName });
 
     const data = await PythonService.getSegments({ body });
-
+    console.log(`data`, data);
     setData({ ...data, localImageName: imageName });
   } catch (error) {
     setError(error);

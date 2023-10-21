@@ -1,65 +1,34 @@
-import config from "../../Config/config";
-
-const urls = config.urls;
-const { pythonServerUrl, reactUrl } = urls;
-const url = `${pythonServerUrl}rotation`;
-
 // Function to switch view
-function switchView({ direction, canvas, fetchRotation }) {
+const switchView = async ({ direction, canvas, fetchRotation, imageName }) => {
   let next_view;
-  const id = canvas.getActiveObject().id;
-  console.log(`id`, id);
 
   const body = JSON.stringify({
-    img: "bladerunner",
+    img: imageName,
     obj: canvas.getActiveObject().id,
     pos: 0,
     dir: direction["corner"],
   });
 
   console.log(`body`, body);
-  fetchRotation({ body });
-  return;
-  fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      img: "bladerunner",
-      obj: canvas.getActiveObject().id,
-      pos: 0,
-      dir: direction["corner"],
-    }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data); // Process the response here
-      next_view = data.nextView;
-      var left = canvas.getActiveObject().left;
-      var top = canvas.getActiveObject().top;
-      var angle = canvas.getActiveObject().angle;
+  const data = await fetchRotation({ body });
 
-      // Updating the view
-      fabric.Image.fromURL(next_view, function (img) {
-        img.set({ left: left, top: top, angle: angle });
-        canvas.remove(canvas.getActiveObject());
-        canvas.add(img);
-        canvas.setActiveObject(img);
-        canvas.renderAll();
-      });
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
+  console.log(data); // Process the response here
+  next_view = data.nextView;
+  var left = canvas.getActiveObject().left;
+  var top = canvas.getActiveObject().top;
+  var angle = canvas.getActiveObject().angle;
 
-const createRotationArrows = ({ canvas, fetchRotation }) => {
+  // Updating the view
+  fabric.Image.fromURL(next_view, function (img) {
+    img.set({ left: left, top: top, angle: angle });
+    canvas.remove(canvas.getActiveObject());
+    canvas.add(img);
+    canvas.setActiveObject(img);
+    canvas.renderAll();
+  });
+};
+
+const createRotationArrows = ({ canvas, fetchRotation, imageName }) => {
   // Load SVG icons
   const arrows = {
     //down: "/static/icons/down-arrow.svg",
@@ -83,35 +52,6 @@ const createRotationArrows = ({ canvas, fetchRotation }) => {
   ];
   let currentObjAngle = 0;
 
-  // // Function to switch view
-  // function switchView(direction) {
-  //   // console.log(canvas.getActiveObject());
-
-  //   if (direction.corner == "leftArrow") {
-  //     currentObjAngle++;
-  //   } else {
-  //     currentObjAngle--;
-  //   }
-
-  //   let num_angles = person_angle_views.length;
-  //   let next_view =
-  //     "/static/rotation/bladerunner/person/" +
-  //     person_angle_views[currentObjAngle % num_angles];
-
-  //   var left = canvas.getActiveObject().left;
-  //   var top = canvas.getActiveObject().top;
-  //   var angle = canvas.getActiveObject().angle;
-
-  //   // Updating the view
-  //   fabric.Image.fromURL(next_view, function (img) {
-  //     img.set({ left: left, top: top, angle: angle });
-  //     canvas.remove(canvas.getActiveObject());
-  //     canvas.add(img);
-  //     canvas.setActiveObject(img);
-  //     canvas.renderAll();
-  //   });
-  // }
-
   // Add arrows as controls
   for (let direction in arrows) {
     var img = document.createElement("img");
@@ -124,7 +64,8 @@ const createRotationArrows = ({ canvas, fetchRotation }) => {
       offsetX: 16,
       cursorStyle: "pointer",
       mouseUpHandler: function (eventData, transform, direction) {
-        switchView({ direction, canvas, fetchRotation });
+        switchView({ direction, canvas, fetchRotation, imageName });
+        // switchView({ direction, canvas, fetchRotation, imageName });
       }.bind(this, direction),
       render: renderIcon(img),
       cornerSize: 24,

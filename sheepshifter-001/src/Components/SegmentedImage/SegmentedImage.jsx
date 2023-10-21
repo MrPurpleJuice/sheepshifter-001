@@ -12,12 +12,11 @@ const fetchRotation = async ({ body }) => {
   try {
     const data = await PythonService.getRotation({ body });
     console.log(`data`, data);
+    return data;
   } catch (error) {}
 };
 
 const backgroundImgUrl = "static/testBackground002.jpg";
-// const canvasScalingFactor = 0.4;
-// const canvasScalingFactor = 0.46;
 const canvasScalingFactor = 0.58;
 
 // Use this to detect when the image has changed
@@ -41,10 +40,10 @@ export default function SegmentedImage({ data }) {
 
   // Only allow the page to render when the image chagnes
   if (shouldRender) {
-    // fetchRotation();
     console.log("rendering========================================>>>");
     prevLocalImageName = localData.localImageName;
     const { canvas } = editor;
+    const { imageName } = localData;
     canvas.clear();
     fabric.Object.prototype.transparentCorners = false;
     fabric.Object.prototype.cornerColor = "blue";
@@ -59,7 +58,7 @@ export default function SegmentedImage({ data }) {
 
     const backgroundImgUrl = localData.background;
 
-    createRotationArrows({ canvas, fetchRotation });
+    createRotationArrows({ canvas, fetchRotation, imageName });
     addBackgroundImg({ canvas, backgroundImgUrl });
     addSegmentedImages({ canvas, localData });
   }
