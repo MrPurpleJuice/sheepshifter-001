@@ -25,14 +25,15 @@
   flex: 1;
   border: 1px solid black;
   margin: 1%;
-  background-color: grey;
+  background-color: var(--box-bg-color);
   overflow: hidden;
+  max-width: 300px;
 }
 
 .box img {
-  /* max-width: 110%; */
+  max-width: 100%;
   /* max-height: auto; */
-  max-height: 150%;
+  /* max-height: 100%; */
   display: block;
 }
 

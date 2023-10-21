@@ -6,11 +6,11 @@ const urls = {
 const paths = { rawImagesPath: "../../../static2/rawImages/inUse/" };
 
 const rawImages = [
-  "flowersRaw001.jpg",
-  "chickenPicnicRaw001.png",
-  "moonManRaw001.png",
-  "tay001.jpg",
-  "tay003.jpg",
+  "bladeRunnerRaw001.jpg",
+  "moonManRaw002.jpg",
+  "taylorRaw001.png",
+  "picnicRaw001.jpg",
+  "eTRaw001.jpg",
 ];
 
 export default { urls, rawImages, paths };
