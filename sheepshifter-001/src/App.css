@@ -1,8 +1,13 @@
+body {
+  /* constants */
+  --body-bg-color: rgb(235, 235, 236);
+  --main-bg-color: rgb(165, 167, 171);
+  --box-bg-color: rgb(226, 226, 226);
+
+  background-color: var(--body-bg-color) !important;
+}
+
 #root {
   margin: 0 auto;
   text-align: center;
-
-  /* constants */
-  --box-bg-color: rgb(253, 253, 253);
-  --main-bg-color: rgb(253, 253, 253);
 }

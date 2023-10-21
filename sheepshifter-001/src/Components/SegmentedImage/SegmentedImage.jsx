@@ -44,9 +44,9 @@ export default function TestFabric({ data }) {
     // Re-render the canvas to apply new dimensions (doesn't work)
     canvas.renderAll();
 
-    createRotationArrows({ editor });
-    addBackgroundImg({ editor, backgroundImgUrl });
-    addSegmentedImages({ editor, localData });
+    createRotationArrows({ canvas });
+    addBackgroundImg({ canvas, backgroundImgUrl });
+    addSegmentedImages({ canvas, localData });
   }
 
   return (

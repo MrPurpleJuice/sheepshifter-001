@@ -3,13 +3,11 @@
   flex-direction: column;
   height: 95vh;
   width: 95vw;
-  /* width: 1200px; */
-  border: 1px solid red;
+  border: 1px solid black;
   margin: auto;
-  display: flex;
-  margin-left: 0px;
   max-width: 1640px;
   max-height: 920px;
+  background-color: var(--main-bg-color);
 }
 
 .topRow {

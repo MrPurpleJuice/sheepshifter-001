@@ -1,4 +1,4 @@
-const createRotationArrows = ({ editor }) => {
+const createRotationArrows = ({ canvas }) => {
   // Load SVG icons
   const arrows = {
     //down: "/static/icons/down-arrow.svg",
@@ -11,33 +11,43 @@ const createRotationArrows = ({ editor }) => {
   let currentView = "front";
 
   // Temporary -- bad code -- sorry!
-  const person_angle_views = ["0.png", "1.png", "2.png", "3.png", "4.png", "5.png", "6.png"]
+  const person_angle_views = [
+    "0.png",
+    "1.png",
+    "2.png",
+    "3.png",
+    "4.png",
+    "5.png",
+    "6.png",
+  ];
   let currentObjAngle = 0;
 
   // Function to switch view
   function switchView(direction) {
-    console.log(editor?.canvas.getActiveObject());
+    // console.log(canvas.getActiveObject());
 
-    if(direction.corner == "leftArrow") {
+    if (direction.corner == "leftArrow") {
       currentObjAngle++;
     } else {
       currentObjAngle--;
     }
 
     let num_angles = person_angle_views.length;
-    let next_view = "/static/rotation/bladerunner/person/" + person_angle_views[currentObjAngle%num_angles];
+    let next_view =
+      "/static/rotation/bladerunner/person/" +
+      person_angle_views[currentObjAngle % num_angles];
 
-    var left = editor?.canvas.getActiveObject().left;
-    var top = editor?.canvas.getActiveObject().top;
-    var angle = editor?.canvas.getActiveObject().angle;
+    var left = canvas.getActiveObject().left;
+    var top = canvas.getActiveObject().top;
+    var angle = canvas.getActiveObject().angle;
 
     // Updating the view
     fabric.Image.fromURL(next_view, function (img) {
       img.set({ left: left, top: top, angle: angle });
-      editor?.canvas.remove(editor?.canvas.getActiveObject());
-      editor?.canvas.add(img);
-      editor?.canvas.setActiveObject(img);
-      editor?.canvas.renderAll();
+      canvas.remove(canvas.getActiveObject());
+      canvas.add(img);
+      canvas.setActiveObject(img);
+      canvas.renderAll();
     });
   }
 
@@ -72,20 +82,16 @@ const createRotationArrows = ({ editor }) => {
   }
 };
 
-const addBackgroundImg = ({ editor, backgroundImgUrl }) => {
+const addBackgroundImg = ({ canvas, backgroundImgUrl }) => {
   fabric.Image.fromURL(backgroundImgUrl, function (img) {
-    editor?.canvas.setBackgroundImage(
-      img,
-      editor?.canvas.renderAll.bind(editor?.canvas),
-      {
-        scaleX: editor?.canvas.width / img.width,
-        scaleY: editor?.canvas.height / img.height,
-      }
-    );
+    canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+      scaleX: canvas.width / img.width,
+      scaleY: canvas.height / img.height,
+    });
   });
 };
 
-const addSegmentedImages = ({ editor, localData }) => {
+const addSegmentedImages = ({ canvas, localData }) => {
   // Here we add each image to the canvas
   for (let i = 0; i < localData.image_urls.length; i++) {
     let imageUrl = localData.image_urls[i];
@@ -96,8 +102,8 @@ const addSegmentedImages = ({ editor, localData }) => {
         left: placement.left,
         top: placement.top,
       });
-      oImg.set({ id: localData.class_labels[i]});
-      editor?.canvas.add(oImg);
+      oImg.set({ id: localData.class_labels[i] });
+      canvas.add(oImg);
     });
   }
 };
