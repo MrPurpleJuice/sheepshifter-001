@@ -75,7 +75,6 @@ export default function SegmentedImage({ data }) {
     });
 
     const body = JSON.stringify({ img: dataURL, obj: imageName });
-    // const body = JSON.stringify({ img: dataURL, obj: "taylor" });
     console.log("reRender");
     const data = await getReRender({ body });
 
