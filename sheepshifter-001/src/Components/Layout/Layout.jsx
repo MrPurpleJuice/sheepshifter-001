@@ -13,7 +13,7 @@ function Layout({ data, onThumbnailClick }) {
     const loadedImages = {};
 
     for (const imageDef of rawImages) {
-      const fileName = imageDef.fileName;
+      const { fileName } = imageDef;
       const filePath = `${paths.rawImagesPath}${fileName}`;
 
       /* @vite-ignore */
@@ -31,9 +31,7 @@ function Layout({ data, onThumbnailClick }) {
   const renderedImages = rawImages.map((imageDef, index) => {
     const { fileName, imageName } = imageDef;
 
-    const onClick = () => {
-      onThumbnailClick({ imageName });
-    };
+    const onClick = () => onThumbnailClick({ imageName });
 
     return (
       <div key={fileName + index} className={css.box} onClick={onClick}>
