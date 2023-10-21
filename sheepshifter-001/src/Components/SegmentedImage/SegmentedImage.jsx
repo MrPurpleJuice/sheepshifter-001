@@ -7,9 +7,6 @@ import utils from "./utils.jsx";
 const { addBackgroundImg, createRotationArrows, addSegmentedImages } = utils;
 
 const backgroundImgUrl = "static/testBackground002.jpg";
-// const backgroundImgUrl = "static/test-4-bg.png";
-
-const aspectRatio = 16 / 9;
 const canvasScalingFactor = 0.63;
 
 // Use this to detect when the image has changed
@@ -49,6 +46,8 @@ export default function TestFabric({ data }) {
 
     // Re-render the canvas to apply new dimensions
     canvas.renderAll();
+
+    const backgroundImgUrl = localData.background;
 
     createRotationArrows({ canvas });
     addBackgroundImg({ canvas, backgroundImgUrl });
