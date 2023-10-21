@@ -44,6 +44,7 @@ function App() {
   return (
     <>
       {error && <div>Error: {error.message}</div>}
+      <div className={"navBar"}>ArtBot</div> {/* Add this line */}
       <Layout {...layoutProps} />
     </>
   );
