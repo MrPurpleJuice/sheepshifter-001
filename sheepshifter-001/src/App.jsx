@@ -17,12 +17,12 @@ const getBody = ({ apiName }) => {
 const fetchSegments = async ({ setData, setError, imageName }) => {
   try {
     const apiName = getApiNameFromImageName({ imageName });
-    console.log(`apiName`, apiName);
 
     const body = getBody({ apiName });
 
     const data = await PythonService.getSegments({ body });
-    setData(data);
+
+    setData({ ...data, localImageName: imageName });
   } catch (error) {
     setError(error);
   }

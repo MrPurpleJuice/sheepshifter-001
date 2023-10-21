@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TestFabric7 from "../SegmentedImage/SegmentedImage";
+import SegmentedImage from "../SegmentedImage/SegmentedImage";
 import config from "../../Config/config";
 
 import css from "./Layout.module.css";
@@ -48,7 +48,7 @@ function Layout({ data, onThumbnailClick }) {
           <div className={css.messageText}>Segment Picker</div>
         </div>
         <div className={css.largeBox}>
-          <TestFabric7 data={data} />
+          <SegmentedImage data={data} />
         </div>
       </div>
     </div>
