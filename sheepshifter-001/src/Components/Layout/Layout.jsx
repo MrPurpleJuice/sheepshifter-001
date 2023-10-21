@@ -6,7 +6,7 @@ import css from "./Layout.module.css";
 
 const { rawImages, paths } = config;
 
-function Layout({ data }) {
+function Layout({ data, onThumbnailClick }) {
   const [images, setImages] = useState({});
 
   async function loadImages() {
@@ -29,9 +29,14 @@ function Layout({ data }) {
   }, []);
 
   const renderedImages = rawImages.map((imageDef, index) => {
-    const fileName = imageDef.fileName;
+    const { fileName, imageName } = imageDef;
+
+    const onClick = () => {
+      onThumbnailClick({ imageName });
+    };
+
     return (
-      <div key={fileName + index} className={css.box}>
+      <div key={fileName + index} className={css.box} onClick={onClick}>
         <img src={images[fileName]} alt={fileName} />
       </div>
     );

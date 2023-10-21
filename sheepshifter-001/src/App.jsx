@@ -34,7 +34,9 @@ function App() {
     fetchSegments({ setData, setError, imageName: defaultImageName });
   }, []);
 
-  const onThumbnailClick = ({ imageName }) => {};
+  const onThumbnailClick = ({ imageName }) => {
+    console.log(`imageName`, imageName);
+  };
 
   const layoutProps = { data, onThumbnailClick };
   return (

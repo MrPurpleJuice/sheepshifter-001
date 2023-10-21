@@ -6,11 +6,22 @@ const urls = {
 const paths = { rawImagesPath: "../../../static2/rawImages/inUse/" };
 
 const rawImages = [
-  { name: "bladeRunnerRaw", fileName: "bladeRunnerRaw001.jpg" },
-  { name: "moonManRaw", fileName: "moonManRaw002.jpg" },
-  { name: "taylorRaw", fileName: "taylorRaw001.png" },
-  { name: "picnicRaw", fileName: "picnicRaw001.jpg" },
-  { name: "eTRaw", fileName: "eTRaw001.jpg" },
+  {
+    imageName: "bladeRunnerRaw",
+    apiName: "bladeRunnerRaw",
+    fileName: "bladeRunnerRaw001.jpg",
+  },
+  { imageName: "moonManRaw", apiName: "moon", fileName: "moonManRaw002.jpg" },
+  { imageName: "taylorRaw", apiName: "taylor", fileName: "taylorRaw001.png" },
+  { imageName: "picnicRaw", apiName: "", fileName: "picnicRaw001.jpg" },
+  { imageName: "eTRaw", apiName: "", fileName: "eTRaw001.jpg" },
 ];
 
-export default { urls, rawImages, paths };
+const getApiNameFromImageName = ({ imageName }) => {
+  return (
+    rawImages.find((image) => image.imageName === imageName)?.apiName ||
+    "apiName not found"
+  );
+};
+
+export default { urls, rawImages, paths, getApiNameFromImageName };
