@@ -65,7 +65,6 @@ const createRotationArrows = ({ canvas, fetchRotation, imageName }) => {
       cursorStyle: "pointer",
       mouseUpHandler: function (eventData, transform, direction) {
         switchView({ direction, canvas, fetchRotation, imageName });
-        // switchView({ direction, canvas, fetchRotation, imageName });
       }.bind(this, direction),
       render: renderIcon(img),
       cornerSize: 24,
