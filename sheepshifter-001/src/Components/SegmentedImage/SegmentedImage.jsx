@@ -51,7 +51,7 @@ export default function TestFabric({ data }) {
     // Re-render the canvas to apply new dimensions
     canvas.renderAll();
 
-    // const backgroundImgUrl = localData.background;
+    const backgroundImgUrl = localData.background;
 
     createRotationArrows({ canvas });
     addBackgroundImg({ canvas, backgroundImgUrl });
