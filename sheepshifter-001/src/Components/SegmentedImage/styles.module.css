@@ -1,15 +1,15 @@
 .main {
-  /* border: 1px solid #ff0000; */
+  border: 1px solid #ff0000;
 
   :global(.sample-canvas) {
-    /* border: 10px solid purple; */
+    border: 10px solid purple;
 
     :global(.canvas-container) {
-      /* border: 10px solid greenyellow; */
+      border: 10px solid greenyellow;
     }
 
     :global(.lower-canvas) {
-      /* border: 5px solid orange; */
+      border: 5px solid orange;
     }
   }
 }

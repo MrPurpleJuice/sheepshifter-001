@@ -1,7 +1,7 @@
 let defaultImageName = "";
-defaultImageName = "bladeRunner";
 defaultImageName = "moon";
 defaultImageName = "taylor";
+defaultImageName = "bladeRunner";
 
 const urls = {
   pythonServerUrl: "http://127.0.0.1:8000/",

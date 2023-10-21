@@ -9,7 +9,7 @@ const { addBackgroundImg, createRotationArrows, addSegmentedImages } = utils;
 const backgroundImgUrl = "static/test-4-bg.png";
 
 const aspectRatio = 16 / 9;
-const canvasScalingFactor = 1.1;
+const canvasScalingFactor = 1;
 let prevLocalImageName = "";
 
 export default function TestFabric({ data }) {
@@ -24,23 +24,25 @@ export default function TestFabric({ data }) {
   }, [data]);
 
   const shouldRender =
+    editor &&
     localData?.localImageName &&
     localData.localImageName !== prevLocalImageName;
 
   if (shouldRender) {
-    prevLocalImageName = localData.localImageName;
     console.log("rendering========================================>>>");
-    editor?.canvas.clear();
+    prevLocalImageName = localData.localImageName;
+    const { canvas } = editor;
+    canvas.clear();
     fabric.Object.prototype.transparentCorners = false;
     fabric.Object.prototype.cornerColor = "blue";
     fabric.Object.prototype.cornerStyle = "circle";
 
     // Set canvas size to the original image size
-    editor?.canvas.setWidth(localData.image_width * canvasScalingFactor);
-    editor?.canvas.setHeight(localData.image_height * canvasScalingFactor);
+    canvas.setWidth(localData.image_width * canvasScalingFactor);
+    canvas.setHeight(localData.image_height * canvasScalingFactor);
 
     // Re-render the canvas to apply new dimensions (doesn't work)
-    editor?.canvas.renderAll();
+    canvas.renderAll();
 
     createRotationArrows({ editor });
     addBackgroundImg({ editor, backgroundImgUrl });
