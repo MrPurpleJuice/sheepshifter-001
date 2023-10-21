@@ -5,7 +5,7 @@ const switchView = async ({ direction, canvas, fetchRotation, imageName }) => {
   const body = JSON.stringify({
     img: imageName,
     obj: canvas.getActiveObject().id,
-    pos: 0,
+    pos: canvas.getActiveObject().pos,
     dir: direction["corner"],
   });
 
@@ -16,10 +16,12 @@ const switchView = async ({ direction, canvas, fetchRotation, imageName }) => {
   var left = canvas.getActiveObject().left;
   var top = canvas.getActiveObject().top;
   var angle = canvas.getActiveObject().angle;
+  var obj = canvas.getActiveObject().id;
+  var pos = data.pos;
 
   // Updating the view
   fabric.Image.fromURL(next_view, function (img) {
-    img.set({ left: left, top: top, angle: angle });
+    img.set({ left: left, top: top, angle: angle, id: obj, pos: pos });
     canvas.remove(canvas.getActiveObject());
     canvas.add(img);
     canvas.setActiveObject(img);
@@ -103,7 +105,7 @@ const addSegmentedImages = ({ canvas, localData }) => {
         left: placement.left,
         top: placement.top,
       });
-      oImg.set({ id: localData.class_labels[i] });
+      oImg.set({ id: localData.class_labels[i], pos: 0 });
       canvas.add(oImg);
     });
   }
