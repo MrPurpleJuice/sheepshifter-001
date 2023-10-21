@@ -9,7 +9,6 @@ const switchView = async ({ direction, canvas, fetchRotation, imageName }) => {
     dir: direction["corner"],
   });
 
-  console.log(`body`, body);
   const data = await fetchRotation({ body });
 
   console.log(data); // Process the response here

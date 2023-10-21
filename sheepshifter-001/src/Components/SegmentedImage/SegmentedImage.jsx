@@ -26,13 +26,12 @@ const canvasScalingFactor = 0.58;
 let prevLocalImageName = "";
 
 let canvas = null;
+let imageName = null;
 export default function SegmentedImage({ data }) {
   const [localData, setLocalData] = useState(data);
   const { editor, onReady } = useFabricJSEditor();
 
-  // let button = <div>button</div>;
   useEffect(() => {
-    // console.log(`data`, data);
     if (data?.localImageName) {
       setLocalData(data);
     }
@@ -48,7 +47,8 @@ export default function SegmentedImage({ data }) {
     console.log("rendering========================================>>>");
     prevLocalImageName = localData.localImageName;
     canvas = editor.canvas;
-    const { imageName } = localData;
+    imageName = localData.imageName;
+
     canvas.clear();
     fabric.Object.prototype.transparentCorners = false;
     fabric.Object.prototype.cornerColor = "blue";
@@ -68,16 +68,16 @@ export default function SegmentedImage({ data }) {
     addSegmentedImages({ canvas, localData });
   }
 
-  const reRender = async ({ canvas }) => {
+  const reRender = async ({ canvas, imageName }) => {
     var dataURL = canvas.toDataURL({
       format: "png",
       quality: 1,
     });
 
-    const body = JSON.stringify({ img: dataURL, obj: "taylor" });
+    const body = JSON.stringify({ img: dataURL, obj: imageName });
+    // const body = JSON.stringify({ img: dataURL, obj: "taylor" });
     console.log("reRender");
     const data = await getReRender({ body });
-    console.log(`data`, data);
 
     // Clearing the current canvas content
     canvas.clear().renderAll(); // Added renderAll() to ensure the canvas is cleared immediately
@@ -93,7 +93,10 @@ export default function SegmentedImage({ data }) {
 
   return (
     <div className={css.main}>
-      <Button variant="outline-primary" onClick={() => reRender({ canvas })}>
+      <Button
+        variant="outline-primary"
+        onClick={() => reRender({ canvas, imageName })}
+      >
         Render
       </Button>
       <FabricJSCanvas className="sample-canvas" onReady={onReady} />

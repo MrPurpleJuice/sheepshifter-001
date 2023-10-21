@@ -2,15 +2,12 @@ import React, { useState, useEffect } from "react";
 import SegmentedImage from "../SegmentedImage/SegmentedImage";
 import config from "../../Config/config";
 
-// import Button from "react-bootstrap/Button";
 import css from "./Layout.module.css";
-// import ReRenderedImage from "../ReRenderedImage/ReRenderedImage";
 
 const { rawImages, paths } = config;
 
 function Layout({ data, onThumbnailClick }) {
   const [images, setImages] = useState({});
-  const [showRerender, setShowRerender] = useState(false);
 
   async function loadImages() {
     const loadedImages = {};
@@ -42,25 +39,16 @@ function Layout({ data, onThumbnailClick }) {
       </div>
     );
   });
-  const reRender = () => {
-    console.log("reRender");
-    setShowRerender(true);
-  };
 
   return (
     <div className={css.main}>
-      {/* <Button variant="outline-primary" onClick={reRender}>
-        Render
-      </Button> */}
       <div className={css.topRow}>{renderedImages}</div>
       <div className={css.bottomRow}>
         <div className={css.tallBox}>
           <div className={css.messageText}>Segment Picker</div>
         </div>
         <div className={css.largeBox}>
-          {/* {true && <ReRenderedImage data={data} />} */}
-          {/* {showRerender && <ReRenderedImage data={data} />} */}
-          {true && <SegmentedImage data={data} />}
+          <SegmentedImage data={data} />
         </div>
       </div>
     </div>
