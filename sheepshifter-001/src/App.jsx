@@ -3,7 +3,7 @@ import PythonService from "./Services/PythonService.jsx";
 import Layout from "./Components/Layout/Layout";
 
 import config from "./Config/config.jsx";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 const { defaultImageName, getApiNameFromImageName } = config;

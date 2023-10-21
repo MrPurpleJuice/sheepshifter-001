@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SegmentedImage from "../SegmentedImage/SegmentedImage";
 import config from "../../Config/config";
 
+import Button from "react-bootstrap/Button";
 import css from "./Layout.module.css";
 
 const { rawImages, paths } = config;
@@ -42,6 +43,7 @@ function Layout({ data, onThumbnailClick }) {
 
   return (
     <div className={css.main}>
+      <Button />
       <div className={css.topRow}>{renderedImages}</div>
       <div className={css.bottomRow}>
         <div className={css.tallBox}>
