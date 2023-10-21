@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TestFabric7 from "../TestFabric7/TestFabric7";
+import TestFabric7 from "../SegmentedImage/SegmentedImage";
 import config from "../../Config/config";
 
 import css from "./Layout.module.css";
