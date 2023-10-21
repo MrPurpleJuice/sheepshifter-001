@@ -9,30 +9,33 @@ const { rawImages, paths } = config;
 function Layout({ data }) {
   const [images, setImages] = useState({});
 
-  useEffect(() => {
-    async function loadImages() {
-      const loadedImages = {};
+  async function loadImages() {
+    const loadedImages = {};
 
-      for (const imagePath of rawImages) {
-        const filePath = `${paths.rawImagesPath}${imagePath}`;
-        console.log(`filePath`, filePath);
+    for (const imageDef of rawImages) {
+      const fileName = imageDef.fileName;
+      const filePath = `${paths.rawImagesPath}${fileName}`;
 
-        /* @vite-ignore */
-        const module = await import(filePath);
-        loadedImages[imagePath] = module.default;
-      }
-
-      setImages(loadedImages);
+      /* @vite-ignore */
+      const module = await import(filePath);
+      loadedImages[fileName] = module.default;
     }
 
+    setImages(loadedImages);
+  }
+
+  useEffect(() => {
     loadImages();
   }, []);
 
-  const renderedImages = rawImages.map((imagePath, index) => (
-    <div key={imagePath + index} className={css.box}>
-      <img src={images[imagePath]} alt={imagePath} />
-    </div>
-  ));
+  const renderedImages = rawImages.map((imageDef, index) => {
+    const fileName = imageDef.fileName;
+    return (
+      <div key={fileName + index} className={css.box}>
+        <img src={images[fileName]} alt={fileName} />
+      </div>
+    );
+  });
 
   return (
     <div className={css.main}>

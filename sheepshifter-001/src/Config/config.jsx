@@ -6,11 +6,11 @@ const urls = {
 const paths = { rawImagesPath: "../../../static2/rawImages/inUse/" };
 
 const rawImages = [
-  "bladeRunnerRaw001.jpg",
-  "moonManRaw002.jpg",
-  "taylorRaw001.png",
-  "picnicRaw001.jpg",
-  "eTRaw001.jpg",
+  { name: "bladeRunnerRaw", fileName: "bladeRunnerRaw001.jpg" },
+  { name: "moonManRaw", fileName: "moonManRaw002.jpg" },
+  { name: "taylorRaw", fileName: "taylorRaw001.png" },
+  { name: "picnicRaw", fileName: "picnicRaw001.jpg" },
+  { name: "eTRaw", fileName: "eTRaw001.jpg" },
 ];
 
 export default { urls, rawImages, paths };
