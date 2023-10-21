@@ -6,8 +6,9 @@ import css from "./Layout.module.css";
 
 const { rawImages, paths } = config;
 
-function Layout({ data, onThumbnailClick }) {
+function Layout({ data, onThumbnailClick, imageName }) {
   const [images, setImages] = useState({});
+  const [layers, setLayers] = useState([]);
 
   async function loadImages() {
     const loadedImages = {};
@@ -26,7 +27,24 @@ function Layout({ data, onThumbnailClick }) {
 
   useEffect(() => {
     loadImages();
-  }, []);
+    updateLayers();
+  }, [imageName]);
+
+  const updateLayers = () => {
+    switch (imageName) {
+      case 'bladeRunner':
+        setLayers(['Car', 'Tree', 'Man']);
+        break;
+      case 'moon':
+        setLayers(['Flagpole', 'Flag', 'Astronaut']);
+        break;
+      case 'taylor':
+        setLayers(['1989', 'Bird', 'Bird', 'Taylor']);
+        break;
+      default:
+        setLayers([]);
+    }
+  };
 
   const renderedImages = rawImages.map((imageDef, index) => {
     const { fileName, imageName } = imageDef;
@@ -46,6 +64,12 @@ function Layout({ data, onThumbnailClick }) {
       <div className={css.bottomRow}>
         <div className={css.tallBox}>
           <div className={css.messageText}>Layers</div>
+
+          <ul>
+            {layers.map((layer, index) => (
+              <li key={index}>{layer}</li>
+            ))}
+          </ul>
         </div>
         <div className={css.largeBox}>
           <SegmentedImage data={data} />

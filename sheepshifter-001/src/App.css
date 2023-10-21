@@ -23,3 +23,21 @@ body {
   top: 0;
   left: 0;
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #e0e0e0;
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+li:hover {
+  background-color: #ccc;
+}

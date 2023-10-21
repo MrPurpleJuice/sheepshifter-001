@@ -31,7 +31,7 @@ const fetchSegments = async ({ setData, setError, imageName }) => {
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [imageName, setImageName] = useState('bladerunner');
+  const [imageName, setImageName] = useState('bladeRunner');
 
   useEffect(() => {
     fetchSegments({ setData, setError, imageName: defaultImageName });
@@ -39,6 +39,7 @@ function App() {
 
   const onThumbnailClick = ({ imageName }) => {
     fetchSegments({ setData, setError, imageName });
+    console.log(imageName)
     setImageName(imageName);
   };
   
